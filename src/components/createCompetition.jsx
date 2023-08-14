@@ -18,14 +18,8 @@ function Competition() {
         let month = today.getMonth() + 1;
         let day = today.getDate();
 
-        // Füge eine führende Null hinzu, wenn Monat/Tag einstellig ist
-        if (month < 10) {
-            month = '0' + month;
-        }
-        if (day < 10) {
-            day = '0' + day;
-        }
-
+        if (month < 10) month = '0' + month;
+        if (day < 10) day = '0' + day;
         return `${year}-${month}-${day}`;
     };
 
@@ -49,6 +43,13 @@ function Competition() {
         };
 
         console.log(formData); // Beispiel: Konsolenausgabe der Formulardaten
+        setOrganizer('');
+        setTeams('2');
+        setLocation('');
+        setSelectedDate(getCurrentDate());
+        setName('');
+        setModus('1');
+        setFields('2');
     };
 
     return (
@@ -56,13 +57,13 @@ function Competition() {
             <form onSubmit={handleSubmit}>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" id="validationDefault01" placeholder="Veranstalter" onChange={(e) => setOrganizer(e.target.value)} required />
+                        <input type="text" className="form-control" id="validationDefault01" value={organizer} placeholder="Veranstalter" onChange={(e) => setOrganizer(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" id="validationDefault02" placeholder="Turniername" onChange={(e) => setName(e.target.value)} required />
+                        <input type="text" className="form-control" id="validationDefault02" value={name} placeholder="Turniername" onChange={(e) => setName(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" id="validationDefault03" placeholder="Ort" onChange={(e) => setLocation(e.target.value)} required />
+                        <input type="text" className="form-control" id="validationDefault03" value={location} placeholder="Ort" onChange={(e) => setLocation(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
                         <input type="date" className="form-control" id="validationDefault04" value={selectedDate}
@@ -74,8 +75,8 @@ function Competition() {
                         <label className="col-form-label">Anzahl Mannschaften</label>
                     </div>
                     <div className="col col-auto">
-                        <select className="custom-select mr-sm-2" id="inlineFormCustomSelect" onChange={(e) => setTeams(e.target.value)} required>
-                            <option defaultValue="2">2</option>
+                        <select className="custom-select mr-sm-2" value={teams} id="inlineFormCustomSelect" onChange={(e) => setTeams(e.target.value)} required>
+                            <option defaultValue={teams}>2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
@@ -90,8 +91,8 @@ function Competition() {
                         <label className="col-form-label">Modus</label>
                     </div>
                     <div className="col col-auto col-md-6 text-right">
-                        <select className="custom-select mr-sm-2" id="modi" onChange={(e) => setModus(e.target.value)} required>
-                            <option  defaultValue="1">Jeder-gegen-jeden</option>
+                        <select className="custom-select mr-sm-2" id="modi" value={modus} onChange={(e) => setModus(e.target.value)} required>
+                            <option  defaultValue={modus}>Jeder-gegen-jeden</option>
                             <option value="2">Schweizer-System</option>
                             <option value="3">Turnier</option>
                         </select>
@@ -102,8 +103,8 @@ function Competition() {
                         <label className="col-form-label">Anzahl Spielfelder</label>
                     </div>
                     <div className="col col-auto">
-                        <select className="custom-select mr-sm-2" id="felder" onChange={(e) => setFields(e.target.value)} required>
-                            <option defaultValue="2">2</option>
+                        <select className="custom-select mr-sm-2" id="felder" value={fields} onChange={(e) => setFields(e.target.value)} required>
+                            <option defaultValue={fields}>2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
