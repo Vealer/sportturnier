@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.tButton {
+  min-width: 100px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.createForm{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  padding: 20px;
+  max-width: 400px;
+  min-width: 400px;
+  background-color: rgb(205, 179, 227);
+
+}

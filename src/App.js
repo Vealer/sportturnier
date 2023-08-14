@@ -1,22 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import Tbutton from './components/button';
+import Competition from './components/createCompetition';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Hello World! You have successfully completed your installation with your browser!
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Tbutton innerText="Neues Turnier erstellen" />
+        <Competition />
       </header>
     </div>
   );
