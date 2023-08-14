@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 
-function Competition() {
+function Competition({onFormSubmit}) {
 
     const [selectedDate, setSelectedDate] = useState('');
     const [organizer, setOrganizer] = useState('');
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [teams, setTeams] = useState('2');
-    const [fields, setFields] = useState('2');
-    const [modus, setModus] = useState('1');
+    const [fields, setFields] = useState('1');
+    const [modus, setModus] = useState('Jeder-gegen-jeden');
 
     // Funktion, um das aktuelle Datum im richtigen Format zu erhalten
     const getCurrentDate = () => {
@@ -17,7 +17,6 @@ function Competition() {
         const year = today.getFullYear();
         let month = today.getMonth() + 1;
         let day = today.getDate();
-
         if (month < 10) month = '0' + month;
         if (day < 10) day = '0' + day;
         return `${year}-${month}-${day}`;
@@ -30,8 +29,6 @@ function Competition() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Hier können Sie die Werte in einer Datenbank speichern oder anderweitig verarbeiten
         const formData = {
             selectedDate,
             organizer,
@@ -41,16 +38,19 @@ function Competition() {
             fields,
             modus
         };
+        onFormSubmit(formData);
+        resetForm();
+    };
 
-        console.log(formData); // Beispiel: Konsolenausgabe der Formulardaten
+    const resetForm = () =>{
         setOrganizer('');
         setTeams('2');
         setLocation('');
         setSelectedDate(getCurrentDate());
         setName('');
-        setModus('1');
-        setFields('2');
-    };
+        setModus('Jeder-gegen-jeden');
+        setFields('1');
+    }
 
     return (
         <div className="createForm">
@@ -75,7 +75,7 @@ function Competition() {
                         <label className="col-form-label">Anzahl Mannschaften</label>
                     </div>
                     <div className="col col-auto">
-                        <select className="custom-select mr-sm-2" value={teams} id="inlineFormCustomSelect" onChange={(e) => setTeams(e.target.value)} required>
+                        <select className="custom-select mr-sm-2" value={teams} onChange={(e) => setTeams(e.target.value)} required>
                             <option defaultValue={teams}>2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -91,10 +91,10 @@ function Competition() {
                         <label className="col-form-label">Modus</label>
                     </div>
                     <div className="col col-auto col-md-6 text-right">
-                        <select className="custom-select mr-sm-2" id="modi" value={modus} onChange={(e) => setModus(e.target.value)} required>
+                        <select className="custom-select mr-sm-2" value={modus} onChange={(e) => setModus(e.target.value)} required>
                             <option  defaultValue={modus}>Jeder-gegen-jeden</option>
-                            <option value="2">Schweizer-System</option>
-                            <option value="3">Turnier</option>
+                            <option value="Schweizer-System">Schweizer-System</option>
+                            <option value="Turnier">Turnier</option>
                         </select>
                     </div>
                 </div>
@@ -103,14 +103,14 @@ function Competition() {
                         <label className="col-form-label">Anzahl Spielfelder</label>
                     </div>
                     <div className="col col-auto">
-                        <select className="custom-select mr-sm-2" id="felder" value={fields} onChange={(e) => setFields(e.target.value)} required>
-                            <option defaultValue={fields}>2</option>
+                        <select className="custom-select mr-sm-2" value={fields} onChange={(e) => setFields(e.target.value)} required>
+                            <option defaultValue={fields}>1</option>
+                            <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="7">7</option>
-                            <option value="8">8</option>
                         </select>
                     </div>
                 </div>

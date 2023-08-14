@@ -1,8 +1,15 @@
-import './App.css';
+import React, { useState } from 'react';
 import Tbutton from './components/button';
-import Competition from './components/createCompetition';
+import Competition from './components/Competition';
+import FormDataRenderer from './components/FormDataRenderer';
 
 function App() {
+  const [submittedFormData, setSubmittedFormData] = useState(null);
+
+  const handleFormSubmit = (formData) => {
+    setSubmittedFormData(formData);
+};
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,7 +17,8 @@ function App() {
           Hello World! You have successfully completed your installation with your browser!
         </p>
         <Tbutton innerText="Neues Turnier erstellen" />
-        <Competition />
+        {!submittedFormData &&  <Competition onFormSubmit={handleFormSubmit}/>}
+        {submittedFormData && <FormDataRenderer formData={submittedFormData} />}
       </header>
     </div>
   );
