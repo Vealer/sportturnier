@@ -35,3 +35,7 @@ form {
   display: flex;
   gap: 10px;
 }
+
+.navbar-light {
+  background-color: #e3f2fd !important;
+}

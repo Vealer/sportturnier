@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from './components/Navbar';
 import Competition from './components/Competition';
 import FormDataRenderer from './components/FormDataRenderer';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
@@ -26,11 +27,11 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Sportturnier Planer</h1>
+        <Navbar />
         </header>
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} /> }/>
+          <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
           <Route path="/form-data" element={<FormDataRenderer formData={formDataSet} />} />
         </Routes>
       </div>

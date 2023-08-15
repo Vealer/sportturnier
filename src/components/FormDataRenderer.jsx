@@ -2,6 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function FormDataRenderer({ formData }) {
+
+    const imageSelector = (img) => {
+
+     if(/[Tt]isch/.test(img)) return "tabletennis.webp";
+     if(/[Ff]u[ßs]/.test(img)) return "soccer.jpg";
+     if(/[Vv]olley/.test(img)) return "volleyball.jpg";
+     if(/[Ss]chach/.test(img)) return "chess.jpg";
+     return "cardimg.webp";
+    }
+
     return (
         <>
             <div className="container">
@@ -12,7 +22,7 @@ function FormDataRenderer({ formData }) {
                     {formData && formData.map((data, index) => (
                         <div className="col col-lg-3 col-md-6 mb-4" key={index}>
                             <div className="card mx-2 h-100 d-flex flex-column" >
-                                <img className="card-img-top" src="/img/cardimg.webp" alt="Card cap" />
+                                <img className="card-img-top" src={`/img/${imageSelector(data.name)}`} alt="Card cap" />
                                 <div className="card-body">
                                     <div>
                                         <h2> {data.name} Turnier: </h2>

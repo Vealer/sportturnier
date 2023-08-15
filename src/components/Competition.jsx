@@ -62,16 +62,16 @@ function Competition({onFormSubmit}) {
             <form onSubmit={handleSubmit}>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" id="validationDefault01" value={organizer} placeholder="Veranstalter" onChange={(e) => setOrganizer(e.target.value)} required />
+                        <input type="text" className="form-control" value={organizer} placeholder="Veranstalter" onChange={(e) => setOrganizer(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" id="validationDefault02" value={name} placeholder="Turniername" onChange={(e) => setName(e.target.value)} required />
+                        <input type="text" className="form-control" value={name} placeholder="Sportart" onChange={(e) => setName(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" id="validationDefault03" value={location} placeholder="Ort" onChange={(e) => setLocation(e.target.value)} required />
+                        <input type="text" className="form-control" value={location} placeholder="Ort" onChange={(e) => setLocation(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
-                        <input type="date" className="form-control" id="validationDefault04" value={selectedDate}
+                        <input type="date" className="form-control" value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)} />
                     </div>
                 </div>
