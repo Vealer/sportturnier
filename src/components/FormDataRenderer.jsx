@@ -8,9 +8,9 @@ function FormDataRenderer({ formData }) {
                 <Link to="/new-competition">
                     <button className="btn btn-primary">Neues Turnier erstellen</button>
                 </Link>
-                <div className='row'>
+                <div className='row row-cols-1 row-cols-md-2'>
                     {formData && formData.map((data, index) => (
-                        <div className="col-lg-3 col-6 mb-4 " key={index}>
+                        <div className="col col-lg-3 col-md-6 mb-4" key={index}>
                             <div className="card mx-2 h-100 d-flex flex-column" >
                                 <img className="card-img-top" src="/img/cardimg.webp" alt="Card cap" />
                                 <div className="card-body">
