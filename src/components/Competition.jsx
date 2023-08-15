@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function Competition({onFormSubmit}) {
-
+    const navigate = useNavigate();
+    const [formDataSet, setFormDataSet] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
     const [organizer, setOrganizer] = useState('');
     const [name, setName] = useState('');
@@ -38,6 +40,9 @@ function Competition({onFormSubmit}) {
             fields,
             modus
         };
+        navigate('/form-data');
+        // history.push('/form-data');
+        setFormDataSet([...formDataSet, formData]);
         onFormSubmit(formData);
         resetForm();
     };
