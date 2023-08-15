@@ -6,11 +6,13 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div>
-      <h1>Willkommen zur Sportturnier Planer App!</h1>
-      <Link to="/new-competition">
-        <button className="btn btn-primary mb-3">Neues Turnier erstellen</button>
+    <div className='container h-100 '>
+      <h1 className='d-flex justify-content-center mt-5'>Willkommen zur Turnierplan App!</h1>
+      <div className='d-flex justify-content-center align-items-center mt-5'>
+      <Link to="/new-competition" >
+        <button className="btn btn-primary  ">Neues Turnier erstellen</button>
       </Link>
+      </div>
     </div>
   );
 }

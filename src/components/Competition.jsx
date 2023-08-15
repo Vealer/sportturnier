@@ -58,7 +58,7 @@ function Competition({onFormSubmit}) {
     }
 
     return (
-        <div className="createForm">
+        <div className="container d-flex justify-content-center mt-5">
             <form onSubmit={handleSubmit}>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
