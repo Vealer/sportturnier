@@ -7,6 +7,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh !important;
+  height: 100%;
   background-image: url('../public/img/background.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -20,23 +21,10 @@ code {
 }
 
 
-
-.tButton {
-  min-width: 100px;
-  margin: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.createForm{
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
 form {
   padding: 20px;
   max-width: 400px;
-  min-width: 400px;
+  min-width: 300px;
   background-color: rgb(205, 179, 227);
 }
 

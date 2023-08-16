@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Competition from './components/Competition';
 import FormDataRenderer from './components/FormDataRenderer';
+import SingleTournament from './components/SingleTournament';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function Home() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
           <Route path="/form-data" element={<FormDataRenderer formData={formDataSet} />} />
+          <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
         </Routes>
       </div>
     </Router>
