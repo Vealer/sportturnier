@@ -2,22 +2,22 @@ import React from 'react';
 
 function MatchTable({ matches, index }) {
     return (
-        <div>
+        <div className="glass-dark p-2 text-light shadow p-3 mb-5  ">
             <h3>{index}. Runde</h3>
-            <table className="table">
-                <thead>
+            <table className="table ">
+                {/* <thead>
                     <tr>
                         <th>Feld</th>
                         <th>Teams</th>
-                        <th>Spielstand</th>
+
                     </tr>
-                </thead>
+                </thead> */}
                 <tbody>
                     {matches.map((match, index) => (
                         <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{match.team1} : {match.team2}</td>
-                            <td><input type="number"  /> : <input type="number"  /></td>
+                            <td><strong>{index + 1}</strong></td>
+                           {match.team2 !== 'Spielfrei' && <td><strong>{match.team1} <input className='w-15' type="number" min="0" /> : <input className='w-15' type="number" min="0" /> {match.team2}</strong></td> } 
+                           {match.team2 === 'Spielfrei' && <td><strong>{match.team1} hat Spielfrei! </strong></td> }
                         </tr>
                     ))}
                 </tbody>

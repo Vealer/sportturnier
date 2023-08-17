@@ -10,6 +10,13 @@ function SingleTournament({ formData }) {
     const [matchDuration, setMatchDuration] = useState('');
     const [matches, setMatches] = useState([]);
 
+    const defaultTeamNames = [];
+    for (let index = 1; index <= selectedTournament.teams; index++) {
+        defaultTeamNames.push(`Team ${index}`);
+    }
+
+    const updatedTeamNames = [...defaultTeamNames];
+
     const handleExpandClick = () => {
         setIsExpanded(!isExpanded);
     };
@@ -22,26 +29,9 @@ function SingleTournament({ formData }) {
 
     const handleSubmit = () => {
         setIsExpanded(false);
-
-        const updatedTeamNames = [...defaultTeamNames];
         teamNames.forEach((name, index) => {
             updatedTeamNames[index] = name || defaultTeamNames[index];
         });
-
-        // Spielplan erstellen
-        const shuffledTeams = shuffleArray(updatedTeamNames);
-
-        const schedule = [];
-
-        for (let i = 0; i < shuffledTeams.length; i += 2) {
-            const team1 = shuffledTeams[i];
-            const team2 = shuffledTeams[i + 1] || 'Spielfrei';
-            schedule.push({ team1, team2 });
-        }
-        const newSchedule = matches.length > 0 ? [...matches] : [];
-        newSchedule.push(schedule);
-        setMatches(newSchedule);
-        console.log(matches);
     };
 
     // Funktion zum Mischen des Arrays (Fisher-Yates-Algorithmus)
@@ -55,14 +45,29 @@ function SingleTournament({ formData }) {
     };
 
 
-    const defaultTeamNames = [];
-    for (let index = 1; index <= selectedTournament.teams; index++) {
-        defaultTeamNames.push(`Team ${index}`);
-    }
+    const handleCreateRound = () => {
+        let shuffledTeams = shuffleArray(defaultTeamNames);
+        const newSchedule = [];
+        let schedule = [];
+        for (let i = 0; i < shuffledTeams.length-1; i++) {
+            for (let j = 0; j < shuffledTeams.length/2; j++) {
+                const team1 = shuffledTeams[j];
+                let team2 = shuffledTeams[shuffledTeams.length-j-1];
+                if (team1 === team2) team2 = 'Spielfrei'
+                schedule.push({ team1, team2 });
+            }
+            newSchedule.push(schedule);
+            schedule = [];
+            shuffledTeams.unshift(shuffledTeams.shift(), shuffledTeams.pop());
+        }
+        setMatches(newSchedule);
+    };
+
+
 
     return (
         <div className="container">
-            <div className="card mb-3">
+            <div className="card mb-3 mt-5 glass-white shadow-lg">
                 <div className="card-body">
                     <h5 className="card-title">{selectedTournament.name} Turnier</h5>
                     <p className="card-text"><strong>Veranstalter:</strong> {selectedTournament.organizer}</p>
@@ -71,11 +76,9 @@ function SingleTournament({ formData }) {
                     <p className="card-text"><strong>Anzahl Mannschaften:</strong> {selectedTournament.teams}</p>
                     <p className="card-text"><strong>Modus:</strong> {selectedTournament.modus}</p>
                     <p className="card-text"><strong>Anzahl Spielfelder:</strong> {selectedTournament.fields}</p>
-
                     <button className="btn btn-primary mt-2" onClick={handleExpandClick}>
                         Einstellungen
                     </button>
-
                     {isExpanded && (
                         <div className="mt-3">
                             {defaultTeamNames.map((teamName, index) => (
@@ -108,15 +111,19 @@ function SingleTournament({ formData }) {
                                     />
                                 </div>
                             </div>
-                            <button className="btn btn-success" onClick={handleSubmit}>
-                                Speichern
-                            </button>
+                            <div className=''>
+                                <button className="btn btn-success" onClick={handleSubmit}>
+                                    Speichern
+                                </button>
+                            </div>
                         </div>
                     )}
-
                 </div>
             </div>
-            {matches.length > 0 && matches.map((match, index) => (<MatchTable key={index} index={index+1} matches={match} />))}
+            {matches.length > 0 && matches.map((match, index) => (<MatchTable key={index} index={index + 1} matches={match} />))}
+            <button className="btn btn-primary mb-5" type="button" onClick={handleCreateRound}>
+                Spielrunde erstellen
+            </button>
         </div>
     );
 }
