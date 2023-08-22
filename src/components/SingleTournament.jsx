@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MatchTable from './MatchTable';
+import TeamTable from './TeamTable';
 
 function SingleTournament({ formData }) {
     const { id } = useParams();
@@ -46,22 +47,24 @@ function SingleTournament({ formData }) {
 
 
     const handleCreateRound = () => {
+        if (defaultTeamNames.length % 2 !== 0) defaultTeamNames.push('Spielfrei');
         let shuffledTeams = shuffleArray(defaultTeamNames);
         const newSchedule = [];
         let schedule = [];
-        for (let i = 0; i < shuffledTeams.length-1; i++) {
-            for (let j = 0; j < shuffledTeams.length/2; j++) {
+        for (let i = 0; i < shuffledTeams.length - 1; i++) {
+            for (let j = 0; j < shuffledTeams.length / 2; j++) {
                 const team1 = shuffledTeams[j];
-                let team2 = shuffledTeams[shuffledTeams.length-j-1];
-                if (team1 === team2) team2 = 'Spielfrei'
-                schedule.push({ team1, team2 });
+                const team2 = shuffledTeams[shuffledTeams.length - j - 1];
+                schedule.push({ team1, team2, results: ['', ''] });
             }
             newSchedule.push(schedule);
             schedule = [];
             shuffledTeams.unshift(shuffledTeams.shift(), shuffledTeams.pop());
         }
         setMatches(newSchedule);
+        console.log(matches)
     };
+
 
 
 
@@ -120,10 +123,17 @@ function SingleTournament({ formData }) {
                     )}
                 </div>
             </div>
-            {matches.length > 0 && matches.map((match, index) => (<MatchTable key={index} index={index + 1} matches={match} />))}
+            {matches.length > 0 && matches.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
+                const updatedSchedule = [...matches];
+                updatedSchedule[roundIndex] = updatedMatches;
+                setMatches(updatedSchedule);
+            }} />))}
             <button className="btn btn-primary mb-5" type="button" onClick={handleCreateRound}>
                 Spielrunde erstellen
             </button>
+            <div className="container mb-5">
+                <TeamTable matches={matches} /> 
+            </div>
         </div>
     );
 }

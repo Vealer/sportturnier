@@ -39,34 +39,52 @@ form {
 
 .glass {
   /* From https://css.glass */
-background: rgba(6, 114, 205, 0.29);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-backdrop-filter: blur(4.9px);
--webkit-backdrop-filter: blur(4.9px);
-border: 1px solid rgba(6, 114, 205, 1);
+  background: rgba(6, 114, 205, 0.29);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+  border: 1px solid rgba(6, 114, 205, 1);
 }
 
-.glass-white{
+.glass-white {
   /* From https://css.glass */
-background: rgba(252, 253, 254, 0.59);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-backdrop-filter: blur(4.9px);
--webkit-backdrop-filter: blur(4.9px);
-border: 1px solid rgba(252, 253, 254, 1);
+  background: rgba(252, 253, 254, 0.59);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+  border: 1px solid rgba(252, 253, 254, 1);
 }
 
-.glass-dark{
+.glass-dark {
+  /* From https://css.glass */
+  background: rgba(33, 34, 34, 0.66);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4.9px);
+  -webkit-backdrop-filter: blur(4.9px);
+  border: 1px solid rgba(33, 34, 34, 1);
+}
+
+.glass-green {
 /* From https://css.glass */
-background: rgba(33, 34, 34, 0.66);
+background: rgba(159, 193, 227, 0.9);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-backdrop-filter: blur(4.9px);
--webkit-backdrop-filter: blur(4.9px);
-border: 1px solid rgba(33, 34, 34, 1);
+backdrop-filter: blur(13.1px);
+-webkit-backdrop-filter: blur(13.1px);
+border: 1px solid rgba(159, 193, 227, 1);
 }
 
-.w-15{
+.w-15 {
   width: 15%;
+}
+
+footer {
+  position: fixed;
+  height: 70px;
+  bottom: 0;
+  width: 100%;
+  
 }

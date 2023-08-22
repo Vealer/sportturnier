@@ -4,6 +4,7 @@ import Competition from './components/Competition';
 import FormDataRenderer from './components/FormDataRenderer';
 import SingleTournament from './components/SingleTournament';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Footer from './components/Footer';
 
 function Home() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }
