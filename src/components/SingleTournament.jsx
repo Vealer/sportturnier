@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MatchTable from './MatchTable';
 import TeamTable from './TeamTable';
+import Timer from './Timer';
 
 function SingleTournament({ formData }) {
     const { id } = useParams();
@@ -53,11 +54,15 @@ function SingleTournament({ formData }) {
         let schedule = [];
         for (let i = 0; i < shuffledTeams.length - 1; i++) {
             for (let j = 0; j < shuffledTeams.length / 2; j++) {
-                const team1 = shuffledTeams[j];
-                const team2 = shuffledTeams[shuffledTeams.length - j - 1];
+                const team1 = i % 2 === 0 ? shuffledTeams[j] : shuffledTeams[shuffledTeams.length - j - 1];
+                const team2 = i % 2 === 0 ? shuffledTeams[shuffledTeams.length - j - 1] : shuffledTeams[j];
                 schedule.push({ team1, team2, results: ['', ''] });
             }
-            newSchedule.push(schedule);
+            schedule.sort((a) => {
+                if (a.team1 === 'Spielfrei' || a.team2 === 'Spielfrei') return -1;
+                return 1;
+            });
+            newSchedule.push(schedule.reverse());
             schedule = [];
             shuffledTeams.unshift(shuffledTeams.shift(), shuffledTeams.pop());
         }
@@ -70,15 +75,14 @@ function SingleTournament({ formData }) {
 
     return (
         <div className="container">
-            <div className="card mb-3 mt-5 glass-white shadow-lg">
-                <div className="card-body">
+            <div className="card mb-5 mt-5 glass-white shadow-lg ">
+                <div className="card-body ">
                     <h5 className="card-title">{selectedTournament.name} Turnier</h5>
                     <p className="card-text"><strong>Veranstalter:</strong> {selectedTournament.organizer}</p>
                     <p className="card-text"><strong>Ort:</strong> {selectedTournament.location}</p>
                     <p className="card-text"><strong>Ausgewähltes Datum:</strong> {selectedTournament.selectedDate}</p>
                     <p className="card-text"><strong>Anzahl Mannschaften:</strong> {selectedTournament.teams}</p>
                     <p className="card-text"><strong>Modus:</strong> {selectedTournament.modus}</p>
-                    <p className="card-text"><strong>Anzahl Spielfelder:</strong> {selectedTournament.fields}</p>
                     <button className="btn btn-primary mt-2" onClick={handleExpandClick}>
                         Einstellungen
                     </button>
@@ -123,6 +127,7 @@ function SingleTournament({ formData }) {
                     )}
                 </div>
             </div>
+            <Timer />
             {matches.length > 0 && matches.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
                 const updatedSchedule = [...matches];
                 updatedSchedule[roundIndex] = updatedMatches;

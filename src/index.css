@@ -15,6 +15,17 @@ body {
 
 }
 
+@font-face {
+  font-family: 'digital-clock'; 
+  src: url('../../sportturnier/public/assets/digital-7.ttf') 
+            format('truetype');
+ }
+
+ @font-face {
+  font-family: 'digital-clock2'; 
+  src: url('../../sportturnier/public/assets/Digital Dismay.otf') 
+ }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -90,5 +101,17 @@ footer {
   position: relative;
   bottom: 0;
   width: 100%;
-  
 }
+
+
+.timer-container {
+  font-family: 'digital-clock', sans-serif; /* Verwende die heruntergeladene Schriftart */
+  /* Weitere Stile für den Timer-Container */
+}
+
+.timer-text {
+  font-size: 5rem; /* Ändere die Schriftgröße nach Bedarf */
+  /* Weitere Stile für den Timer-Text */
+}
+
+

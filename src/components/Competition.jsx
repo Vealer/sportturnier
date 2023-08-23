@@ -10,7 +10,6 @@ function Competition({onFormSubmit}) {
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [teams, setTeams] = useState('2');
-    const [fields, setFields] = useState('1');
     const [modus, setModus] = useState('Jeder-gegen-jeden');
 
     // Funktion, um das aktuelle Datum im richtigen Format zu erhalten
@@ -37,7 +36,6 @@ function Competition({onFormSubmit}) {
             name,
             location,
             teams,
-            fields,
             modus
         };
         navigate('/form-data');
@@ -54,12 +52,11 @@ function Competition({onFormSubmit}) {
         setSelectedDate(getCurrentDate());
         setName('');
         setModus('Jeder-gegen-jeden');
-        setFields('1');
     }
 
     return (
-        <div className="container d-flex justify-content-center mt-5">
-            <form onSubmit={handleSubmit}>
+        <div className="container d-flex justify-content-center mt-5 ">
+            <form className='glass-green' onSubmit={handleSubmit}>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <input type="text" className="form-control" value={organizer} placeholder="Veranstalter" onChange={(e) => setOrganizer(e.target.value)} required />
@@ -100,22 +97,6 @@ function Competition({onFormSubmit}) {
                             <option  defaultValue={modus}>Jeder-gegen-jeden</option>
                             <option value="Schweizer-System">Schweizer-System</option>
                             <option value="Turnier">Turnier</option>
-                        </select>
-                    </div>
-                </div>
-                <div className="form-group row">
-                    <div className="col col-md-6">
-                        <label className="col-form-label">Anzahl Spielfelder</label>
-                    </div>
-                    <div className="col col-auto">
-                        <select className="custom-select mr-sm-2" value={fields} onChange={(e) => setFields(e.target.value)} required>
-                            <option defaultValue={fields}>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
                         </select>
                     </div>
                 </div>
