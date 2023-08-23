@@ -3,8 +3,7 @@ function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-      
-            <footer className="bg-light py-4 fixed-bottom footer">
+            <footer className="bg-light py-4  footer">
                 <div className="container text-center">
                     <p>&copy; {currentYear} by Valer Neufeld. Alle Rechte vorbehalten.</p>
                     <div>
@@ -12,7 +11,6 @@ function Footer() {
                     </div>
                 </div>
             </footer>
-      
     );
 }
 

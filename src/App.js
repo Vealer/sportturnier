@@ -11,9 +11,9 @@ function Home() {
     <div className='container h-100 '>
       <h1 className='d-flex justify-content-center mt-5'>Willkommen zur Turnierplan App!</h1>
       <div className='d-flex justify-content-center align-items-center mt-5'>
-      <Link to="/new-competition" >
-        <button className="btn btn-primary  ">Neues Turnier erstellen</button>
-      </Link>
+        <Link to="/new-competition" >
+          <button className="btn btn-primary  ">Neues Turnier erstellen</button>
+        </Link>
       </div>
     </div>
   );
@@ -31,7 +31,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-        <Navbar />
+          <Navbar />
         </header>
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -39,6 +39,7 @@ function App() {
           <Route path="/form-data" element={<FormDataRenderer formData={formDataSet} />} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
         </Routes>
+
       </div>
       <Footer />
     </Router>
