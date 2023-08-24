@@ -1,33 +1,4 @@
-// import React, { useState, useEffect } from 'react';
 
-// function Timer() {
-//     const [time, setTime] = useState(900); // 15 Minuten in Sekunden
-//     const [isActive, setIsActive] = useState(false);
-
-//     useEffect(() => {
-//         let interval;
-
-//         if (isActive) {
-//             interval = setInterval(() => {
-//                 setTime(prevTime => (prevTime > 0 ? prevTime - 1 : prevTime));
-//             }, 1000);
-//         } else {
-//             clearInterval(interval);
-//         }
-
-//         return () => {
-//             clearInterval(interval);
-//         };
-//     }, [isActive]);
-
-//     const handleStartStop = () => {
-//         setIsActive(prevIsActive => !prevIsActive);
-//     };
-
-//     const handleReset = () => {
-//         setTime(900); // Zurück auf 15 Minuten setzen
-//         setIsActive(false);
-//     };
 
 //     const handleIncreaseTime = () => {
 //         setTime(prevTime => prevTime + 60); // 1 Minute erhöhen
@@ -64,6 +35,24 @@ function Timer() {
     const [isActive, setIsActive] = useState(false);
     const [progress, setProgress] = useState(100);
 
+    // Get all the Meters
+    const meters = document.querySelectorAll('svg[data-value] .meter');
+
+    meters.forEach((path) => {
+        // Get the length of the path
+        let length = path.getTotalLength();
+        // Get the value of the meter
+        let value = parseInt(path.parentNode.getAttribute('data-value'));
+        // Calculate the percentage of the total length
+        let to = length * ((100 - value) / 100);
+
+        path.getBoundingClientRect();
+        // Set the Offset
+        path.style.strokeDashoffset = Math.max(0, to); 
+        // path.nextElementSibling.textContent = `${value}%`;
+    });
+
+
     const toggleTimer = () => {
         setIsActive(!isActive);
     };
@@ -92,20 +81,15 @@ function Timer() {
     }, [isActive, time]);
 
     return (
-        <div className="timer-container">
-            <svg className="timer-svg">
-                <circle
-                    className="timer-progress"
-                    r="18"
-                    cx="20"
-                    cy="20"
-                    style={{ strokeDasharray: `${progress} 100` }}
-                ></circle>
+        <div className="timer-container container glass-green mb-5 p-3">
+            <svg className='circle' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" data-value={progress}>
+                <circle r="45" cx="50" cy="50" />
+                <path className="meter" d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0" strokeLinecap="round" strokeLinejoin="round" strokeDashoffset="282.78302001953125" strokeDasharray="282.78302001953125" />
+                <text className="timer-text" x="50" y="60" textAnchor='middle'>{formatTime(time)}</text>
             </svg>
-            <h1 className="timer-text">{formatTime(time)}</h1>
             <div className="timer-buttons">
-                <button onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
-                <button onClick={resetTimer}>Reset</button>
+                <button className='btn btn-primary' onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
+                <button className='btn btn-primary' onClick={resetTimer}>Reset</button>
             </div>
         </div>
     );
