@@ -105,20 +105,19 @@ footer {
 
 
 .timer-container {
-  font-family: 'digital-clock', sans-serif; /* Verwende die heruntergeladene Schriftart */
-  /* Weitere Stile für den Timer-Container */
+  font-family: 'digital-clock', sans-serif; 
+  display: flex;
+  justify-content: center;
 }
 
 .timer-text {
-  font-size: 2rem; /* Ändere die Schriftgröße nach Bedarf */
-  /* Weitere Stile für den Timer-Text */
+  font-size: 2rem; 
 }
 
 .circle{
-  display: inline-flex;
-  vertical-align: bottom;
   width: 200px;
   height: 200px;
+  padding: 20px;
 }
 
 circle {
@@ -135,6 +134,12 @@ circle {
   transition: stroke-dashoffset 1s cubic-bezier(0.43, 0.41, 0.22, 0.91);
   transform-origin: center center;
   transform: rotate(-90deg) scaleX(-1);
+}
+
+.timer-buttons{
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
 }
 
 text {

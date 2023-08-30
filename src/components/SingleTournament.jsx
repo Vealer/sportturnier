@@ -9,7 +9,7 @@ function SingleTournament({ formData }) {
     const selectedTournament = formData[id];
     const [isExpanded, setIsExpanded] = useState(false);
     const [teamNames, setTeamNames] = useState([]);
-    const [matchDuration, setMatchDuration] = useState('');
+    const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
     const [matches, setMatches] = useState([]);
 
     const defaultTeamNames = [];
@@ -27,6 +27,14 @@ function SingleTournament({ formData }) {
         const updatedTeamNames = [...teamNames];
         updatedTeamNames[index] = newName;
         setTeamNames(updatedTeamNames);
+    };
+
+    const handleMatchDurationChange = (event) => {
+        const { name, value } = event.target;
+        setMatchDuration((prevState) => ({
+            ...prevState,
+            [name]: parseInt(value),
+        }));
     };
 
     const handleSubmit = () => {
@@ -106,17 +114,16 @@ function SingleTournament({ formData }) {
                             ))}
                             <div className="form-group row">
                                 <label htmlFor="matchDuration" className="col-sm-3 col-form-label">
-                                    Spieldauer (in Minuten)
+                                    Spieldauer
                                 </label>
-                                <div className="col-sm-9">
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        id="matchDuration"
-                                        value={matchDuration}
-                                        onChange={(e) => setMatchDuration(e.target.value)}
-                                    />
+                                <div className="col-sm-9 w-50" >
+                                    <div className=''>
+                                        Minuten 
+                                        <input id='matchDuration' className='w-15 text-center ' type="number" name="minutes" value={matchDuration.minutes} onChange={handleMatchDurationChange} /> :
+                                        <input className='w-15 text-center' type="number" name="seconds" value={matchDuration.seconds} onChange={handleMatchDurationChange} /> Sekunden
+                                    </div>
                                 </div>
+
                             </div>
                             <div className=''>
                                 <button className="btn btn-success" onClick={handleSubmit}>
@@ -127,7 +134,7 @@ function SingleTournament({ formData }) {
                     )}
                 </div>
             </div>
-            <Timer />
+            <Timer minutes={matchDuration.minutes} seconds={matchDuration.seconds} />
             {matches.length > 0 && matches.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
                 const updatedSchedule = [...matches];
                 updatedSchedule[roundIndex] = updatedMatches;
@@ -137,7 +144,7 @@ function SingleTournament({ formData }) {
                 Spielrunde erstellen
             </button>
             <div className="container mb-5">
-                <TeamTable matches={matches} /> 
+                <TeamTable matches={matches} />
             </div>
         </div>
     );
