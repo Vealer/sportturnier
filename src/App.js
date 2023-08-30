@@ -8,18 +8,18 @@ import SingleTournament from './components/SingleTournament';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 // import dotenv from 'dotenv'; // Importiere die dotenv-Library
 // dotenv.config(); // Lade Umgebungsvariablen aus der .env-Datei
 
 
 // const mongoose = require('mongoose');
-const mongoURI = process.env.MONGODB_URI;
+// const mongoURI = process.env.MONGODB_URI;
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Error connecting to MongoDB:', err));
+// mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => console.log('Connected to MongoDB'))
+//     .catch(err => console.error('Error connecting to MongoDB:', err));
 
 function Home() {
   return (
@@ -63,7 +63,7 @@ function App() {
   );
 }
 
-// export default App;
+export default App;
 
 
 // import React, { useEffect, useState } from 'react';
