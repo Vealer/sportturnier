@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import { useParams } from 'react-router-dom';
 import MatchTable from './MatchTable';
 import TeamTable from './TeamTable';
@@ -8,7 +8,7 @@ function SingleTournament({ formData }) {
     const { id } = useParams();
     const selectedTournament = formData[id];
     const [isExpanded, setIsExpanded] = useState(false);
-    const [teamNames, setTeamNames] = useState([]);
+    
     const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
     const [matches, setMatches] = useState([]);
 
@@ -16,7 +16,7 @@ function SingleTournament({ formData }) {
     for (let index = 1; index <= selectedTournament.teams; index++) {
         defaultTeamNames.push(`Team ${index}`);
     }
-
+    const [teamNames, setTeamNames] = useState(defaultTeamNames);
     const updatedTeamNames = [...defaultTeamNames];
 
     const handleExpandClick = () => {
@@ -56,8 +56,8 @@ function SingleTournament({ formData }) {
 
 
     const handleCreateRound = () => {
-        if (defaultTeamNames.length % 2 !== 0) defaultTeamNames.push('Spielfrei');
-        let shuffledTeams = shuffleArray(defaultTeamNames);
+        if (teamNames.length % 2 !== 0) teamNames.push('Spielfrei');
+        let shuffledTeams = shuffleArray(teamNames);
         const newSchedule = [];
         let schedule = [];
         for (let i = 0; i < shuffledTeams.length - 1; i++) {

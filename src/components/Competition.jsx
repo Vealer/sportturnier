@@ -7,7 +7,7 @@ function Competition({onFormSubmit}) {
     const [formDataSet, setFormDataSet] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
     const [organizer, setOrganizer] = useState('');
-    const [name, setName] = useState('');
+    const [name, setName] = useState('Volleyball');
     const [location, setLocation] = useState('');
     const [teams, setTeams] = useState('2');
     const [modus, setModus] = useState('Jeder-gegen-jeden');
@@ -62,7 +62,17 @@ function Competition({onFormSubmit}) {
                         <input type="text" className="form-control" value={organizer} placeholder="Veranstalter" onChange={(e) => setOrganizer(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" value={name} placeholder="Sportart" onChange={(e) => setName(e.target.value)} required />
+                        {/* <input type="text" className="form-control" value={name} placeholder="Sportart" onChange={(e) => setName(e.target.value)} required /> */}
+                        <select className="custom-select mr-sm-2" value={name} onChange={(e) => setName(e.target.value)} required>
+                            <option defaultValue="Volleyball">Volleyball</option>
+                            <option value="Fussball">Fussball</option>
+                            <option value="Tischtennis">Tischtennis</option>
+                            <option value="Kicker">Kicker</option>
+                            <option value="Dart">Dart</option>
+                            <option value="Gruppenspiel">Gruppenspiel</option>
+                            <option value="Schach">Schach</option>
+                            <option value="Sonstiges">Sonstiges</option>
+                        </select>
                     </div>
                     <div className="col-md-12 mb-3">
                         <input type="text" className="form-control" value={location} placeholder="Ort" onChange={(e) => setLocation(e.target.value)} required />
@@ -95,7 +105,7 @@ function Competition({onFormSubmit}) {
                     <div className="col col-auto col-md-6 text-right">
                         <select className="custom-select mr-sm-2" value={modus} onChange={(e) => setModus(e.target.value)} required>
                             <option  defaultValue={modus}>Jeder-gegen-jeden</option>
-                            <option value="Schweizer-System">Schweizer-System</option>
+                            {/* <option value="Schweizer-System">Schweizer-System</option> */}
                             <option value="Turnier">Turnier</option>
                         </select>
                     </div>
