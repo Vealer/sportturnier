@@ -12,7 +12,6 @@ function Competition({onFormSubmit}) {
     const [teams, setTeams] = useState('2');
     const [modus, setModus] = useState('Jeder-gegen-jeden');
 
-    // Funktion, um das aktuelle Datum im richtigen Format zu erhalten
     const getCurrentDate = () => {
         const today = new Date();
         const year = today.getFullYear();
@@ -23,7 +22,6 @@ function Competition({onFormSubmit}) {
         return `${year}-${month}-${day}`;
     };
 
-    // Initialisiere das ausgewählte Datum mit dem aktuellen Datum
     useState(() => {
         setSelectedDate(getCurrentDate());
     }, []);
@@ -39,7 +37,6 @@ function Competition({onFormSubmit}) {
             modus
         };
         navigate('/form-data');
-        // history.push('/form-data');
         setFormDataSet([...formDataSet, formData]);
         onFormSubmit(formData);
         resetForm();
