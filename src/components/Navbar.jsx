@@ -24,7 +24,7 @@ function Navbar() {
                     </li>
                 </ul>
                 <div className="dropdown">
-                    <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                    <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown"  />
                     <div className="dropdown-menu dropdown-menu-right">
                         <button className="dropdown-item" type="button">Ausloggen</button>
                     </div>
