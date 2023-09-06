@@ -36,7 +36,7 @@ function Competition({onFormSubmit}) {
             teams,
             modus
         };
-        navigate('/form-data');
+        navigate('/tournaments');
         setFormDataSet([...formDataSet, formData]);
         onFormSubmit(formData);
         resetForm();
@@ -61,14 +61,14 @@ function Competition({onFormSubmit}) {
                     <div className="col-md-12 mb-3">
                         {/* <input type="text" className="form-control" value={name} placeholder="Sportart" onChange={(e) => setName(e.target.value)} required /> */}
                         <select className="custom-select mr-sm-2" value={name} onChange={(e) => setName(e.target.value)} required>
-                            <option defaultValue="Volleyball">Volleyball</option>
-                            <option value="Fussball">Fussball</option>
-                            <option value="Tischtennis">Tischtennis</option>
-                            <option value="Kicker">Kicker</option>
-                            <option value="Dart">Dart</option>
-                            <option value="Gruppenspiel">Gruppenspiel</option>
-                            <option value="Schach">Schach</option>
-                            <option value="Sonstiges">Sonstiges</option>
+                            <option defaultValue="volleyball">Volleyball</option>
+                            <option value="fussball">Fussball</option>
+                            <option value="tischtennis">Tischtennis</option>
+                            <option value="kicker">Kicker</option>
+                            <option value="dart">Dart</option>
+                            <option value="gruppenspiel">Gruppenspiel</option>
+                            <option value="schach">Schach</option>
+                            <option value="sonstige">Sonstiges</option>
                         </select>
                     </div>
                     <div className="col-md-12 mb-3">
