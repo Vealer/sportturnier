@@ -23,6 +23,14 @@ function App() {
     setFormDataSet([...formDataSet, formData]);
   };
 
+  function deleteTournament(tournamentIndex) {
+    const updatedFormDataSet = [...formDataSet];
+    updatedFormDataSet.splice(tournamentIndex, 1);
+    setFormDataSet(updatedFormDataSet);
+  }
+  
+  
+
   return (
     <Router>
       <div className="App">
@@ -32,7 +40,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home isLogged={isLoggedIn}  getLoginStatus={changeLogin}/>} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
-          <Route path="/tournaments" element={<Tournaments formData={formDataSet} />} />
+          <Route path="/tournaments" element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament}/>} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
           <Route path="/datenschutz" element={<PrivacyPolicy />} />
 
