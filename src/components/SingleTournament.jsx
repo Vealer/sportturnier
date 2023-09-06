@@ -144,7 +144,7 @@ function SingleTournament({ formData }) {
                 Spielrunde erstellen
             </button>
             <div className="container mb-5">
-                <TeamTable matches={matches} />
+                <TeamTable matches={matches} discipline={selectedTournament.name}/>
             </div>
         </div>
     );
