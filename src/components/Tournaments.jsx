@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function FormDataRenderer({ formData }) {
+function Tournaments({ formData }) {
 
     const imageSelector = (img) => {
 
@@ -49,4 +49,4 @@ function FormDataRenderer({ formData }) {
     );
 }
 
-export default FormDataRenderer;
+export default Tournaments;

@@ -22,8 +22,8 @@ function Navbar({ isLogged, getLoginStatus }) {
             </button>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li className={`nav-item ${location.pathname === '/form-data' ? 'active' : ''}`}>
-                        <Link className="nav-link" to="/form-data">Turniere</Link>
+                    <li className={`nav-item ${location.pathname === '/tournaments' ? 'active' : ''}`}>
+                        <Link className="nav-link" to="/tournaments">Turniere</Link>
                     </li>
                     <li className={`nav-item ${location.pathname === '/new-competition' ? 'active' : ''}`}>
                         <Link className="nav-link" to="/new-competition">Neues Turnier</Link>

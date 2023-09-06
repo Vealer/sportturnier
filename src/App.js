@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Competition from './components/Competition';
-import FormDataRenderer from './components/FormDataRenderer';
+import Tournaments from './components/Tournaments';
 import SingleTournament from './components/SingleTournament';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
@@ -32,7 +32,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home isLogged={isLoggedIn}  getLoginStatus={changeLogin}/>} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
-          <Route path="/form-data" element={<FormDataRenderer formData={formDataSet} />} />
+          <Route path="/tournaments" element={<Tournaments formData={formDataSet} />} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
           <Route path="/datenschutz" element={<PrivacyPolicy />} />
 
