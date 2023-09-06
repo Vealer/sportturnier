@@ -6,19 +6,17 @@ import SingleTournament from './components/SingleTournament';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
-import Login from './components/Login';
+import Home from './components/Home';
 
-function Home() {
-  return (
-    <div className='container h-100 '>
-      <h1 className='d-flex justify-content-center mt-5'>Willkommen zur Turnierplan App!</h1>
-      <Login />
-    </div>
-  );
-}
+
 
 function App() {
   const [formDataSet, setFormDataSet] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const changeLogin = (isLogged) => {
+    setIsLoggedIn(isLogged);
+  };
 
 
   const handleFormSubmit = (formData) => {
@@ -29,10 +27,10 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <Navbar />
+          <Navbar isLogged={isLoggedIn} getLoginStatus={changeLogin}/>
         </header>
         <Routes>
-          <Route path="/" exact element={<Home />} />
+          <Route path="/" exact element={<Home getLoginStatus={changeLogin}/>} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
           <Route path="/form-data" element={<FormDataRenderer formData={formDataSet} />} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />

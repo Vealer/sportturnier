@@ -1,8 +1,14 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-function Navbar() {
+function Navbar({ isLogged, getLoginStatus }) {
+    const navigate = useNavigate();
     const location = useLocation();
+
+    const handleLogOut = (e) => {
+        navigate('/');
+        getLoginStatus(false);
+      };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,12 +29,13 @@ function Navbar() {
                         <Link className="nav-link" to="/new-competition">Neues Turnier</Link>
                     </li>
                 </ul>
-                <div className="dropdown">
-                    <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown"  />
+                {isLogged && <div className="dropdown">
+                    <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown" />
                     <div className="dropdown-menu dropdown-menu-right">
-                        <button className="dropdown-item" type="button">Ausloggen</button>
+                        <button className="dropdown-item" type="button" onClick={handleLogOut}>Ausloggen</button>
                     </div>
                 </div>
+                }
             </div>
         </nav>
     )
