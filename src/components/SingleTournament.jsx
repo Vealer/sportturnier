@@ -9,7 +9,7 @@ function SingleTournament({ formData }) {
     const { id } = useParams();
     const selectedTournament = formData[id];
     const [isExpanded, setIsExpanded] = useState(false);
-    
+
     const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
     const [matches, setMatches] = useState([]);
 
@@ -83,15 +83,15 @@ function SingleTournament({ formData }) {
 
 
     return (
-        <div className="container">
-            <div className="card mb-5 mt-5 glass-white shadow-lg ">
-                <div className="card-body ">
-                    <h5 className="card-title">{_.capitalize(selectedTournament.name)} Turnier</h5>
-                    <p className="card-text"><strong>Veranstalter:</strong> {selectedTournament.organizer}</p>
-                    <p className="card-text"><strong>Ort:</strong> {selectedTournament.location}</p>
-                    <p className="card-text"><strong>Ausgewähltes Datum:</strong> {selectedTournament.selectedDate}</p>
-                    <p className="card-text"><strong>Anzahl Mannschaften:</strong> {selectedTournament.teams}</p>
-                    <p className="card-text"><strong>Modus:</strong> {selectedTournament.modus}</p>
+        <div class="container">
+            <div class="card mb-5 mt-5 glass-white shadow-lg text-center">
+                <div class="card-body">
+                    <h2 class="card-title"><strong>{_.capitalize(selectedTournament.name)} Turnier</strong></h2>
+                    <h3 class="card-text mt-4"><strong>Veranstalter:</strong> {selectedTournament.organizer}</h3>
+                    <div class="row text-center display-flex justify-content-center mt-4 gap-3">
+                            <h3 class="card-text mr-3"><strong>Ort:</strong> {selectedTournament.location}</h3>
+                            <h3 class="card-text"><strong>Datum:</strong> {selectedTournament.selectedDate}</h3>
+                    </div>
                     <button className="btn btn-primary mt-2" onClick={handleExpandClick}>
                         Einstellungen
                     </button>
@@ -119,7 +119,7 @@ function SingleTournament({ formData }) {
                                 </label>
                                 <div className="col-sm-9 w-50" >
                                     <div className=''>
-                                        Minuten 
+                                        Minuten
                                         <input id='matchDuration' className='w-15 text-center ' type="number" name="minutes" value={matchDuration.minutes} onChange={handleMatchDurationChange} /> :
                                         <input className='w-15 text-center' type="number" name="seconds" value={matchDuration.seconds} onChange={handleMatchDurationChange} /> Sekunden
                                     </div>
@@ -145,7 +145,7 @@ function SingleTournament({ formData }) {
                 Spielrunde erstellen
             </button>
             <div className="container mb-5">
-                <TeamTable matches={matches} discipline={selectedTournament.name}/>
+                <TeamTable matches={matches} discipline={selectedTournament.name} />
             </div>
         </div>
     );

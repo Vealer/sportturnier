@@ -10,7 +10,6 @@ function Competition({onFormSubmit}) {
     const [name, setName] = useState('Volleyball');
     const [location, setLocation] = useState('');
     const [teams, setTeams] = useState('2');
-    const [modus, setModus] = useState('Jeder-gegen-jeden');
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -34,7 +33,6 @@ function Competition({onFormSubmit}) {
             name,
             location,
             teams,
-            modus
         };
         navigate('/tournaments');
         setFormDataSet([...formDataSet, formData]);
@@ -48,7 +46,6 @@ function Competition({onFormSubmit}) {
         setLocation('');
         setSelectedDate(getCurrentDate());
         setName('');
-        setModus('Jeder-gegen-jeden');
     }
 
     return (
@@ -57,6 +54,9 @@ function Competition({onFormSubmit}) {
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <input type="text" className="form-control" value={organizer} placeholder="Veranstalter" onChange={(e) => setOrganizer(e.target.value)} required />
+                    </div>
+                    <div className="col-md-12 mb-3">
+                        <input type="text" className="form-control" value={location} placeholder="Ort" onChange={(e) => setLocation(e.target.value)} required />
                     </div>
                     <div className="col-md-12 mb-3">
                         {/* <input type="text" className="form-control" value={name} placeholder="Sportart" onChange={(e) => setName(e.target.value)} required /> */}
@@ -71,9 +71,7 @@ function Competition({onFormSubmit}) {
                             <option value="sonstige">Sonstiges</option>
                         </select>
                     </div>
-                    <div className="col-md-12 mb-3">
-                        <input type="text" className="form-control" value={location} placeholder="Ort" onChange={(e) => setLocation(e.target.value)} required />
-                    </div>
+
                     <div className="col-md-12 mb-3">
                         <input type="date" className="form-control" value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)} />
@@ -95,7 +93,7 @@ function Competition({onFormSubmit}) {
                         </select>
                     </div>
                 </div>
-                <div className="form-group row">
+                {/* <div className="form-group row">
                     <div className="col col-md-6">
                         <label className="col-form-label">Modus</label>
                     </div>
@@ -103,10 +101,10 @@ function Competition({onFormSubmit}) {
                         <select className="custom-select mr-sm-2" value={modus} onChange={(e) => setModus(e.target.value)} required>
                             <option  defaultValue={modus}>Jeder-gegen-jeden</option>
                             {/* <option value="Schweizer-System">Schweizer-System</option> */}
-                            <option value="Turnier">Turnier</option>
-                        </select>
-                    </div>
-                </div>
+                            {/* <option value="Turnier">Turnier</option> */}
+                        {/* </select> */}
+                    {/* </div> */} 
+                {/* </div> */}
                 <button className="btn btn-primary col-md-12 mb-3" type="submit">Erstellen!</button>
             </form>
         </div>

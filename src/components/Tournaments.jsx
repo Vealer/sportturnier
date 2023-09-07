@@ -35,13 +35,12 @@ function Tournaments({ formData, onDeleteTournament }) {
                                 <div className="card-body">
                                     <Link to={`/tournament/${index}`} className="text-decoration-none">
 
-                                        <div>
+                                        <div className='text-decoration-none'>
                                             <h2> {_.capitalize(data.name)} Turnier </h2>
                                             <p><strong>Veranstalter:</strong> {data.organizer}</p>
                                             <p><strong>Ort:</strong> {data.location}</p>
-                                            <p><strong>Ausgewähltes Datum:</strong> {data.selectedDate}</p>
+                                            <p><strong>Datum:</strong> {data.selectedDate}</p>
                                             <p><strong>Anzahl Mannschaften:</strong> {data.teams}</p>
-                                            <p><strong>Modus:</strong> {data.modus}</p>
                                         </div>
                                     </Link>
                                 </div>
