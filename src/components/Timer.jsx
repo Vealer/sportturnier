@@ -52,6 +52,13 @@ function Timer({ minutes, seconds }) {
       
       React.useEffect(() => {
         let interval;
+        if (time === 0) {
+            setIsActive(false);
+            setTime(minutes * 60 + seconds);
+            setProgress(100);
+            const audio = new Audio('../assets/counter.wav');
+            audio.play();
+        }        
       
         if (isActive && time > 0) {
           interval = setInterval(() => {

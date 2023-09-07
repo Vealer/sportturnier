@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import MatchTable from './MatchTable';
 import TeamTable from './TeamTable';
 import Timer from './Timer';
+import _ from 'lodash';
 
 function SingleTournament({ formData }) {
     const { id } = useParams();
@@ -85,7 +86,7 @@ function SingleTournament({ formData }) {
         <div className="container">
             <div className="card mb-5 mt-5 glass-white shadow-lg ">
                 <div className="card-body ">
-                    <h5 className="card-title">{selectedTournament.name} Turnier</h5>
+                    <h5 className="card-title">{_.capitalize(selectedTournament.name)} Turnier</h5>
                     <p className="card-text"><strong>Veranstalter:</strong> {selectedTournament.organizer}</p>
                     <p className="card-text"><strong>Ort:</strong> {selectedTournament.location}</p>
                     <p className="card-text"><strong>Ausgewähltes Datum:</strong> {selectedTournament.selectedDate}</p>
