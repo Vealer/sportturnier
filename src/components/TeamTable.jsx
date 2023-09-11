@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TeamTable({ matches }) {
+function TeamTable({ matches, discipline }) {
     // Erstellen eines Objekts, um die Statistiken für jedes Team zu speichern
     const teamStats = {};
 
@@ -19,10 +19,10 @@ function TeamTable({ matches }) {
                 teamStats[team1].goalsAgainst += parseInt(match.results[1]);
                 if (winnerIndex === 0) {
                     teamStats[team1].wins += 1;
-                    teamStats[team1].points += 3;
+                    teamStats[team1].points += discipline === 'schach' ? 1 : 3;
                 } else if (winnerIndex === 2) {
                     teamStats[team1].draws += 1;
-                    teamStats[team1].points += 1;
+                    teamStats[team1].points += discipline === 'schach' ? 0.5 : 1;
                 } else {
                     teamStats[team1].losses += 1;
                 }
@@ -36,10 +36,10 @@ function TeamTable({ matches }) {
                 teamStats[team2].goalsAgainst += parseInt(match.results[0]);
                 if (winnerIndex === 1) {
                     teamStats[team2].wins += 1;
-                    teamStats[team2].points += 3;
+                    teamStats[team2].points += discipline === 'schach' ? 1 : 3;
                 } else if (winnerIndex === 2) {
                     teamStats[team2].draws += 1;
-                    teamStats[team2].points += 1;
+                    teamStats[team2].points += discipline === 'schach' ? 0.5 : 1;
                 } else {
                     teamStats[team2].losses += 1;
                 }
@@ -64,7 +64,7 @@ function TeamTable({ matches }) {
                         <th>#</th>
                         <th>Team</th>
                         <th>S/U/N</th>
-                        <th>Bilanz</th>
+                        {discipline !== 'schach' && <th>Bilanz</th>}
                         <th>Punkte</th>
                     </tr>
                 </thead>
@@ -74,7 +74,7 @@ function TeamTable({ matches }) {
                             <td>{index + 1}</td>
                             <td>{team}</td>
                             <td>{teamStats[team].wins} / {teamStats[team].draws} / {teamStats[team].losses}</td>
-                            <td>{teamStats[team].goalsFor} : {teamStats[team].goalsAgainst}</td>
+                            { discipline !== 'schach' && <td>{teamStats[team].goalsFor} : {teamStats[team].goalsAgainst}</td>}
                             <td><strong>{teamStats[team].points}</strong></td>
                         </tr>
                     ))}
