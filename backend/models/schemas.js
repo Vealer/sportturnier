@@ -16,8 +16,17 @@ const contactSchema = new Schema({
     entryDate: {type: Date, default: Date.now()},
 });
 
+const tournamentSchema = new Schema({
+    organizer: {type:String, required:true},
+    location: {type:String, required:true},
+    sport: {type:String, required:true},
+    amount: {type:String, required:true},
+
+});
+
 const Users = mongoose.model('Users', userSchema, 'users');
+const Tournaments = mongoose.model('Tournaments', tournamentSchema, 'turniere');
 const Contact = mongoose.model('Contact', contactSchema, 'contact_form');
-const mySchemas = {'Users': Users, 'Contact': Contact}
+const mySchemas = {'Users': Users, 'Contact': Contact, 'Tournaments': Tournaments}
 
 module.exports = mySchemas;
