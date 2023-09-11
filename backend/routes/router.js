@@ -1,20 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const schemas = require('../models/schemas');
+const { Await } = require('react-router-dom');
 
-router.get('/users', (req, res) => {
-    const userData = [
-        {
-            "id": 1,
-            "name": "John",
-            "username": "John Smith",
-            "email": "john@gmail.com",
-            "address": {
-                "street": "Kulatarest",
-                "suite": "Apt. 556",
-                "city": "Maine",
-            }
-        }
-    ]
+
+
+router.post('/contact', async (req, res) => {
+    const { email, website, message } = req.body;
+
+    const contactData = { email: email, website: website, message: message }
+
+    const newContact = new schemas.Contact(contactData)
+    const saveContact = await newContact.save()
+    if (saveContact) res.send('Message sent. Thank you.')
+
+    res.end()
+})
+
+router.get('/users', async (req, res) => {
+const users = schemas.Users
+
+const userData = await users.find({}).exec()
+if (userData){
+    res.send(JSON.stringify(userData))
+}
 
     res.send(userData);
 })
