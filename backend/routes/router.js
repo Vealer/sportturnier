@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const schemas = require('../models/schemas');
+var currentUserID = "";
 
 router.post('/contact', async (req, res) => {
     const { email, website, message } = req.body;
@@ -19,6 +20,7 @@ router.post('/addTournament', async (req, res) => {
         location: location,
         sport: sport,
         amount: amount,
+        user: currentUserID
     });
 
     newTournament.save()
@@ -76,5 +78,43 @@ router.get('/users', async (req, res) => {
 
     res.send(userData);
 })
+
+router.post('/addUser', async (req, res) => {
+    const { userName, password } = req.body;
+    try {
+      const existingUser = await schemas.Users.findOne({ username: userName }).exec();
+      if (existingUser) {
+        res.status(409).send('Der Benutzername existiert bereits. Wähle einen anderen.');
+      } else {
+        const user = { username: userName, password: password };
+        const newUser = new schemas.Users(user);
+        const newUserResult = await newUser.save();
+        console.log('New user created!');
+        currentUserID = newUserResult.id;
+        res.redirect('/new-competitionDB');
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+    }
+  });
+  
+
+router.post('/signIn', async (req, res) => {
+    const { userName, password } = req.body;
+    try {
+      const user = await schemas.Users.findOne({ username: userName }).exec();
+      if (user && user.password === password) {
+        currentUserID = user.id;
+        res.redirect('/new-competitionDB');
+      } else {
+        res.status(401).send('Invalid username or password');
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+    }
+  });
+  
 
 module.exports = router;

@@ -25,28 +25,28 @@ function CompetitionDB({onFormSubmit}) {
         setSelectedDate(getCurrentDate());
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = {
-            selectedDate,
-            organizer,
-            name,
-            location,
-            teams,
-        };
-        navigate('/tournaments');
-        setFormDataSet([...formDataSet, formData]);
-        onFormSubmit(formData);
-        resetForm();
-    };
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const formData = {
+    //         selectedDate,
+    //         organizer,
+    //         name,
+    //         location,
+    //         teams,
+    //     };
+    //     navigate('/tournaments');
+    //     setFormDataSet([...formDataSet, formData]);
+    //     onFormSubmit(formData);
+    //     resetForm();
+    // };
 
-    const resetForm = () =>{
-        setOrganizer('');
-        setTeams('2');
-        setLocation('');
-        setSelectedDate(getCurrentDate());
-        setName('');
-    }
+    // const resetForm = () =>{
+    //     setOrganizer('');
+    //     setTeams('2');
+    //     setLocation('');
+    //     setSelectedDate(getCurrentDate());
+    //     setName('');
+    // }
 
     return (
         <div className="container d-flex justify-content-center mt-5 ">

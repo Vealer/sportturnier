@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     name: {type: String},
-    email: {type: String},
-    website: {type: String},
+    password: {type: String},
     entryDate: {type: Date, default: Date.now()},
 })
 
@@ -21,6 +20,7 @@ const tournamentSchema = new Schema({
     location: {type:String, required:true},
     sport: {type:String, required:true},
     amount: {type:String, required:true},
+    user: {type:String, required:true}
 
 });
 
