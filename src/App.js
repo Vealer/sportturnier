@@ -43,7 +43,7 @@ function App() {
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
           <Route path="/new-competitionDB" element={<CompetitionDB  />} />
           <Route path="/tournaments" element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament}/>} />
-          <Route path="/tournamentsDB" element={<Tournaments onDeleteTournament={deleteTournament}/>} />
+          <Route path="/tournamentsDB" element={<Tournaments />} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
           <Route path="/datenschutz" element={<PrivacyPolicy />} />
 

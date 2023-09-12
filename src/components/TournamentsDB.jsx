@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
-function TournamentsDB({ onDeleteTournament }) {
+function TournamentsDB() {
 
     useEffect(() => {
         fetchTournaments();
@@ -28,7 +28,8 @@ function TournamentsDB({ onDeleteTournament }) {
 
     const handleDelete = async (event, index) => {
         event.stopPropagation();
-        const response = await fetch(`/tournaments/${index}`, { method: 'DELETE' });
+        const tournamentID = tournaments[index].id;
+        const response = await fetch(`/tournaments/${tournamentID}`, { method: 'DELETE' });
         if (response.ok) {
             fetchTournaments();
         } else {
