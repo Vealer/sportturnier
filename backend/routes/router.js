@@ -91,7 +91,8 @@ router.post('/addUser', async (req, res) => {
         const newUserResult = await newUser.save();
         console.log('New user created!');
         currentUserID = newUserResult.id;
-        res.redirect('/new-competitionDB');
+        res.status(200).send('OK');
+        
       }
     } catch (err) {
       console.log(err);
@@ -106,7 +107,8 @@ router.post('/signIn', async (req, res) => {
       const user = await schemas.Users.findOne({ username: userName }).exec();
       if (user && user.password === password) {
         currentUserID = user.id;
-        // res.redirect('/new-competitionDB');
+        console.log(currentUserID);
+        res.status(200).send('OK');
       } else {
         res.status(401).send('Invalid username or password');
       }
