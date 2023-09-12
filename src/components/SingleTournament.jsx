@@ -80,8 +80,6 @@ function SingleTournament({ formData }) {
     };
 
 
-
-
     return (
         <div class="container">
             <div class="card mb-5 mt-5 glass-white shadow-lg text-center">
