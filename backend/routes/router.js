@@ -49,6 +49,22 @@ router.get('/tournaments', async (req, res) => {
         });
 });
 
+router.delete('/tournaments/:id', async (req, res) => {
+    const tournaments = schemas.Tournaments;
+    try {
+        const deletedTournament = await tournaments.findByIdAndDelete(req.params.id).exec();
+        if (deletedTournament) {
+            res.status(204).send();
+        } else {
+            res.status(404).send('Tournament not found');
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal server error');
+    }
+});
+
+
 
 router.get('/users', async (req, res) => {
     const users = schemas.Users

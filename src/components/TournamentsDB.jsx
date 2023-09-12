@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 function TournamentsDB({ onDeleteTournament }) {
-    
-        useEffect( () => {
-            fetchTournaments();
-        }, []);
-    
-        const [tournaments, setTournaments] = useState([]);
-    
-        const fetchTournaments = async () => {
-            const data = await fetch('/tournaments');
-            const tournaments = await data.json();
-            setTournaments(tournaments);
-        };
+
+    useEffect(() => {
+        fetchTournaments();
+    }, []);
+
+    const [tournaments, setTournaments] = useState([]);
+
+    const fetchTournaments = async () => {
+        const data = await fetch('/tournaments');
+        const tournaments = await data.json();
+        setTournaments(tournaments);
+    };
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -26,9 +26,14 @@ function TournamentsDB({ onDeleteTournament }) {
         setHoveredIndex(null);
     };
 
-    const handleDelete = (event, index) => {
+    const handleDelete = async (event, index) => {
         event.stopPropagation();
-        onDeleteTournament(index);
+        const response = await fetch(`/tournaments/${index}`, { method: 'DELETE' });
+        if (response.ok) {
+            fetchTournaments();
+        } else {
+            console.log(response.statusText);
+        }
     };
 
     return (
