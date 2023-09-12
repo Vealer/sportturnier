@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const schemas = require('../models/schemas');
-const { Await } = require('react-router-dom');
-
-
 
 router.post('/contact', async (req, res) => {
     const { email, website, message } = req.body;
@@ -17,7 +14,6 @@ router.post('/contact', async (req, res) => {
 
 router.post('/addTournament', async (req, res) => {
     const { sport, organizer, amount, location } = req.body;
-
     const newTournament = new schemas.Tournaments({
         organizer: organizer,
         location: location,
@@ -25,20 +21,34 @@ router.post('/addTournament', async (req, res) => {
         amount: amount,
     });
 
-    try {
-        const results = await newTournament.save();
-        if (results) {
-            res.redirect('/');
-        } else {
-            res.end('Error Saving.');
-        }
-    } catch (err) {
-        console.log(err);
-        res.redirect('/new-competitionDB');
-    }
-
+    newTournament.save()
+        .then(results => {
+            if (results) {
+                res.redirect('/');
+            } else {
+                res.end('Error Saving.');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/new-competitionDB');
+        });
     res.end()
 })
+
+
+router.get('/tournaments', async (req, res) => {
+    const tournaments = schemas.Tournaments;
+    tournaments.find({}).exec()
+        .then(tournamentData => {
+            if (tournamentData) res.end(tournamentData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.end();
+        });
+});
+
 
 router.get('/users', async (req, res) => {
     const users = schemas.Users
