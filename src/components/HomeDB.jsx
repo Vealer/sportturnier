@@ -23,17 +23,6 @@ function Home({ getLoginStatus, isLogged }) {
     getLoginStatus(true);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const userData = {
-      userName,
-      userPassword
-    };
-    setFormDataSet([...formDataSet, userData]);
-    navigate('/new-competition');
-    getLoginStatus(true);
-  };
-
   const handleAddUserSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -43,9 +32,9 @@ function Home({ getLoginStatus, isLogged }) {
         body: JSON.stringify({ userName: newUserName, password: newUserPassword })
       });
       if (response.ok) {
-        // Registrierung erfolgreich, tue etwas
+        navigate('/new-competitionDB');
+        getLoginStatus(true);
       } else {
-        // Registrierung fehlgeschlagen, zeige Fehlermeldung an
         setAddUserError('Username already exists');
       }
     } catch (err) {
@@ -63,9 +52,9 @@ function Home({ getLoginStatus, isLogged }) {
         body: JSON.stringify({ userName, userPassword })
       });
       if (response.ok) {
-        // Anmeldung erfolgreich, tue etwas
+        navigate('/new-competitionDB');
+        getLoginStatus(true);
       } else {
-        // Anmeldung fehlgeschlagen, zeige Fehlermeldung an
         setSignInError('Invalid username or password');
       }
     } catch (err) {

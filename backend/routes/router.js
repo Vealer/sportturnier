@@ -106,7 +106,7 @@ router.post('/signIn', async (req, res) => {
       const user = await schemas.Users.findOne({ username: userName }).exec();
       if (user && user.password === password) {
         currentUserID = user.id;
-        res.redirect('/new-competitionDB');
+        // res.redirect('/new-competitionDB');
       } else {
         res.status(401).send('Invalid username or password');
       }
