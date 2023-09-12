@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Competition from './components/Competition';
+import CompetitionDB from './components/CompetitionDB';
 import Tournaments from './components/Tournaments';
 import SingleTournament from './components/SingleTournament';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home isLogged={isLoggedIn}  getLoginStatus={changeLogin}/>} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
+          <Route path="/new-competitionDB" element={<CompetitionDB  />} />
           <Route path="/tournaments" element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament}/>} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
           <Route path="/datenschutz" element={<PrivacyPolicy />} />
