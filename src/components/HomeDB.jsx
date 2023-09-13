@@ -10,7 +10,7 @@ function Home({ getLoginStatus, isLogged }) {
   const [addUserError, setAddUserError] = useState('');
 
   const handleGuestLoginChange = () => {
-    navigate('/new-competitionDB');
+    navigate('/new-competition');
     getLoginStatus(true);
   };
 

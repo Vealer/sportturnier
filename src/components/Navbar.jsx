@@ -34,10 +34,10 @@ function Navbar({ isLogged, getLoginStatus }) {
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li className={`nav-item ${location.pathname === '/tournamentsDB' ? 'active' : ''}`}>
-                        <Link className="nav-link" to="/tournamentsDB">Turniere</Link>
+                        <Link className="nav-link" to={ user ? "/tournamentsDB" : "/tournaments" }>Turniere</Link>
                     </li>
                     <li className={`nav-item ${location.pathname === '/new-competitionDB' ? 'active' : ''}`}>
-                        <Link className="nav-link" to="/new-competitionDB">Neues Turnier</Link>
+                        <Link className="nav-link" to={ user ? "/new-competitionDB" : "/new-competition" }>Neues Turnier</Link>
                     </li>
                 </ul>
                 {isLogged && <div className="dropdown">
