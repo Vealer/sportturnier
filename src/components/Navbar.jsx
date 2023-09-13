@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 function Navbar({ isLogged, getLoginStatus }) {
     const navigate = useNavigate();
     const location = useLocation();
 
+    useEffect(() => {
+        fetchUser();
+    }, []);
+
+    const [user, setUser] = useState([]);
+
+    const fetchUser = async () => {
+        const user = await fetch('/user');
+        setUser(user);
+    };
+
     const handleLogOut = (e) => {
-        navigate('/');
+        navigate('/login');
         getLoginStatus(false);
       };
 
@@ -22,15 +33,16 @@ function Navbar({ isLogged, getLoginStatus }) {
             </button>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li className={`nav-item ${location.pathname === '/tournaments' ? 'active' : ''}`}>
-                        <Link className="nav-link" to="/tournaments">Turniere</Link>
+                    <li className={`nav-item ${location.pathname === '/tournamentsDB' ? 'active' : ''}`}>
+                        <Link className="nav-link" to="/tournamentsDB">Turniere</Link>
                     </li>
-                    <li className={`nav-item ${location.pathname === '/new-competition' ? 'active' : ''}`}>
-                        <Link className="nav-link" to="/new-competition">Neues Turnier</Link>
+                    <li className={`nav-item ${location.pathname === '/new-competitionDB' ? 'active' : ''}`}>
+                        <Link className="nav-link" to="/new-competitionDB">Neues Turnier</Link>
                     </li>
                 </ul>
                 {isLogged && <div className="dropdown">
                     <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown" />
+                    <p>{user ? user.username : 'Gast'}</p>
                     <div className="dropdown-menu dropdown-menu-right">
                         <button className="dropdown-item" type="button" onClick={handleLogOut}>Ausloggen</button>
                     </div>

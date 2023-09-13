@@ -4,31 +4,18 @@ import { useNavigate } from 'react-router-dom';
 
 function Home({ getLoginStatus, isLogged }) {
   const navigate = useNavigate();
-  const [formDataSet, setFormDataSet] = useState([]);
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [signInError, setSignInError] = useState('');
   const [addUserError, setAddUserError] = useState('');
 
   const handleGuestLoginChange = () => {
-    const userData = {
-      userName: 'gast',
-      userPassword: 'gast-321'
-
-    };
-    setFormDataSet([...formDataSet, userData]);
-    navigate('/new-competition');
+    navigate('/new-competitionDB');
     getLoginStatus(true);
   };
 
   const handleAddUserSubmit = async (event) => {
-    event.preventDefault();
-    setSignInError('');
-    setAddUserError('');
-    if(userName.length < 5) {
-      setSignInError('Der Benutzername muss mindestens 5 Zeichen lang sein!');
-      return false;
-    }
+    validation(event);
     try {
       const response = await fetch('/addUser', {
         method: 'POST',
@@ -48,13 +35,7 @@ function Home({ getLoginStatus, isLogged }) {
   };
 
   const handleSignInSubmit = async (event) => {
-    event.preventDefault();
-    setSignInError('');
-    setAddUserError('');
-    if(userName.length < 5) {
-      setSignInError('Der Benutzername muss mindestens 5 Zeichen lang sein!');
-      return false;
-    }
+    validation(event);
     try {
       const response = await fetch('/signIn', {
         method: 'POST',
@@ -72,6 +53,16 @@ function Home({ getLoginStatus, isLogged }) {
       setSignInError('Internal server error');
     }
   };
+
+  function validation(event){
+    event.preventDefault();
+    setSignInError('');
+    setAddUserError('');
+    if(userName.length < 5) {
+      setSignInError('Der Benutzername muss mindestens 5 Zeichen lang sein!');
+      return false;
+    }
+  }
 
 
   return (
