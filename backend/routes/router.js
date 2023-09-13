@@ -63,6 +63,29 @@ router.get('/singleTournament/:id', async (req, res) => {
     });
 });
 
+router.put('/setTournamentPlan/:id', async (req, res) => {
+  const tournaments = schemas.Tournaments;
+  const tournamentId = req.params.id;
+  const newPlan = req.body.plan;
+
+  try {
+    const tournament = await tournaments.findOneAndUpdate(
+      { id: tournamentId },
+      { plan: newPlan },
+      { new: true }
+    );
+    if (tournament) {
+      res.send(tournament);
+    } else {
+      res.status(404).send('Turnier nicht vorhanden!');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Serverfehler');
+  }
+});
+
+
 router.delete('/tournaments/:id', async (req, res) => {
   const tournaments = schemas.Tournaments;
   try {

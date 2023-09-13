@@ -18,11 +18,7 @@ function SingleTournament() {
     }, [id]);
 
     const [selectedTournament, setSelectedTournament] = useState([]);
-
-
-
     const [isExpanded, setIsExpanded] = useState(false);
-
     const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
     const [matches, setMatches] = useState([]);
 
@@ -89,8 +85,28 @@ function SingleTournament() {
             shuffledTeams.unshift(shuffledTeams.shift(), shuffledTeams.pop());
         }
         setMatches(newSchedule);
+        updateTournamentPlan(selectedTournament.id, newSchedule);
         console.log(matches)
     };
+
+    const updateTournamentPlan = async (tournamentId, newPlan) => {
+        try {
+          const response = await fetch(`/setTournamentPlan/${tournamentId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ plan: newPlan })
+          });
+          const data = await response.json();
+          setSelectedTournament(data);
+          return data;
+        } catch (err) {
+          console.log(err);
+          return null;
+        }
+      };
+      
 
 
     return (
