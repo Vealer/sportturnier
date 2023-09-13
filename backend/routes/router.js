@@ -51,6 +51,18 @@ router.get('/tournaments', async (req, res) => {
     });
 });
 
+router.get('/singleTournament/:id', async (req, res) => {
+  const tournaments = schemas.Tournaments;
+  tournaments.find({ id: req.params.id }).exec()
+    .then(tournamentData => {
+      if (tournamentData) res.send(tournamentData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).send('Turnier nicht vorhanden!');
+    });
+});
+
 router.delete('/tournaments/:id', async (req, res) => {
   const tournaments = schemas.Tournaments;
   try {
