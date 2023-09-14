@@ -163,7 +163,8 @@ function SingleTournament() {
                 </div>
             </div>
             <Timer minutes={matchDuration.minutes} seconds={matchDuration.seconds} />
-            {matches.length > 0 && matches.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
+            {/* {matches.length > 0 && matches.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => { */}
+            {selectedTournament.plan.length > 0 && selectedTournament.plan.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
                 const updatedSchedule = [...matches];
                 updatedSchedule[roundIndex] = updatedMatches;
                 setMatches(updatedSchedule);
