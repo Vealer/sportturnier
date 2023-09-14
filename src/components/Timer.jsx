@@ -1,42 +1,16 @@
-//     const handleIncreaseTime = () => {
-//         setTime(prevTime => prevTime + 60); // 1 Minute erhöhen
-//     };
-
-//     const handleDecreaseTime = () => {
-//         setTime(prevTime => (prevTime >= 60 ? prevTime - 60 : prevTime)); // 1 Minute verringern, aber nicht unter 0 gehen
-//     };
-
-
-//     return (
-//         <div className='container glass-green p-5 mb-5 timer-container'>
-//             <h1 className='timer-text container'>{formatTime(time)}</h1>
-//             <button className='btn btn-primary' onClick={handleStartStop}>{isActive ? 'Pause' : 'Start'}</button>
-//             <button className='btn btn-primary' onClick={handleReset}>Reset</button>
-//             <button className='btn btn-primary' onClick={handleIncreaseTime}>+1 Minute</button>
-//             <button className='btn btn-primary' onClick={handleDecreaseTime}>-1 Minute</button>
-//         </div>
-//     );
-// }
-
-
-
 import React, { useEffect, useState } from 'react';
 
 function Timer({ minutes, seconds }) {
     const [time, setTime] = useState(minutes * 60 + seconds);
     const [isActive, setIsActive] = useState(false);
     const [progress, setProgress] = useState(100);
-
-    // Get all the Meters
     const meters = document.querySelectorAll('svg[data-value] .meter');
-
     meters.forEach((path) => {
         let length = path.getTotalLength();
         let value = parseInt(path.parentNode.getAttribute('data-value'));
         let to = length * ((100 - value) / 100);
         path.getBoundingClientRect();
         path.style.strokeDashoffset = Math.max(0, to);
-        // path.nextElementSibling.textContent = `${value}%`;
     });
 
 
@@ -52,7 +26,7 @@ function Timer({ minutes, seconds }) {
 
     useEffect(() => {
         setTime(minutes * 60 + seconds);
-      }, [minutes, seconds]);
+    }, [minutes, seconds]);
 
     React.useEffect(() => {
         let interval;
@@ -78,7 +52,6 @@ function Timer({ minutes, seconds }) {
 
     return (
         <div className="timer-container container glass-green mb-5 p-3">
-
             <div className="timer-buttons mt-3">
                 <button className='btn btn-primary' onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <svg className='circle' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" data-value={progress}>
