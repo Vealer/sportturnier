@@ -21,8 +21,8 @@ const tournamentSchema = new Schema({
     sport: { type: String, required: true },
     amount: { type: String, required: true },
     user: { type: String, required: true },
-    plan: { type: Object },
-
+    date: { type: String, required: true },
+    plan: { type: Object, required: true },
 });
 
 const Users = mongoose.model('Users', userSchema, 'users');

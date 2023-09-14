@@ -41,12 +41,7 @@ function CompetitionDB({onFormSubmit}) {
     // };
 
     // const resetForm = () =>{
-    //     setOrganizer('');
-    //     setTeams('2');
-    //     setLocation('');
-    //     setSelectedDate(getCurrentDate());
-    //     setName('');
-    // }
+
 
     return (
         <div className="container d-flex justify-content-center mt-5 ">
@@ -72,7 +67,7 @@ function CompetitionDB({onFormSubmit}) {
                     </div>
 
                     <div className="col-md-12 mb-3">
-                        <input type="date" className="form-control" value={selectedDate}
+                        <input type="date" className="form-control" name="tdate" value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)} />
                     </div>
                 </div>

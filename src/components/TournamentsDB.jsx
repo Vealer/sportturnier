@@ -50,7 +50,7 @@ function TournamentsDB() {
                                         <button className="btn btn-danger btn-sm" onClick={(event) => handleDelete(event, index)}>X</button>
                                     </div>
                                 )}
-                                <img className="card-img-top" src={`/img/${data.name + '.jpg'}`} alt="Card cap" />
+                                <img className="card-img-top" src={`/img/${data.sport + '.jpg'}`} alt="Card cap" />
                                 <div className="card-body">
                                     <Link to={`/tournamentDB/${tournaments[index].id}`} className="text-decoration-none">
 
@@ -58,8 +58,8 @@ function TournamentsDB() {
                                             <h2> {_.capitalize(data.name)} Turnier </h2>
                                             <p><strong>Veranstalter:</strong> {data.organizer}</p>
                                             <p><strong>Ort:</strong> {data.location}</p>
-                                            <p><strong>Datum:</strong> {data.selectedDate}</p>
-                                            <p><strong>Anzahl Mannschaften:</strong> {data.teams}</p>
+                                            <p><strong>Datum:</strong> {data.date}</p>
+                                            <p><strong>Anzahl Mannschaften:</strong> {data.amount}</p>
                                         </div>
                                     </Link>
                                 </div>

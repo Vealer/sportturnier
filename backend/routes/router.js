@@ -3,6 +3,27 @@ const router = express.Router();
 const schemas = require('../models/schemas');
 var currentUserID = "guest";
 
+
+
+  // Anmelderoute
+router.post('/signIn', async (req, res) => {
+    const { userName, password } = req.body;
+    try {
+      const user = await schemas.Users.findOne({ username: userName }).exec();
+      if (user && user.password === password) {
+        // Sitzungsvariable setzen
+        // req.session.currentUser = user.id;
+        currentUserID = user.id;
+        res.status(200).send('OK');
+      } else {
+        res.status(401).send('Invalid username or password');
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send('Internal server error');
+    }
+  });
+
 router.post('/contact', async (req, res) => {
   const { email, website, message } = req.body;
   const contactData = { email: email, website: website, message: message }
@@ -14,18 +35,21 @@ router.post('/contact', async (req, res) => {
 })
 
 router.post('/addTournament', async (req, res) => {
-  const { sport, organizer, amount, location } = req.body;
+  const { sport, organizer, amount, location, tdate } = req.body;
   const newTournament = new schemas.Tournaments({
     organizer: organizer,
     location: location,
     sport: sport,
     amount: amount,
-    user: currentUserID
+    user: currentUserID,
+    date: tdate,
+    plan: {team: 'Holzbein'},
   });
 
   newTournament.save()
     .then(results => {
       if (results) {
+        console.log(results);
         res.redirect('/tournamentsDB');
       } else {
         res.end('Error Saving.');
@@ -133,21 +157,21 @@ router.post('/addUser', async (req, res) => {
 });
 
 
-router.post('/signIn', async (req, res) => {
-  const { userName, password } = req.body;
-  try {
-    const user = await schemas.Users.findOne({ username: userName }).exec();
-    if (user && user.password === password) {
-      currentUserID = user.id;
-      res.status(200).send('OK');
-    } else {
-      res.status(401).send('Invalid username or password');
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Internal server error');
-  }
-});
+// router.post('/signIn', async (req, res) => {
+//   const { userName, password } = req.body;
+//   try {
+//     const user = await schemas.Users.findOne({ username: userName }).exec();
+//     if (user && user.password === password) {
+//       currentUserID = user.id;
+//       res.status(200).send('OK');
+//     } else {
+//       res.status(401).send('Invalid username or password');
+//     }
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send('Internal server error');
+//   }
+// });
 
 
 module.exports = router;
