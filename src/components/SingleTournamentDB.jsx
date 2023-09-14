@@ -18,7 +18,7 @@ function SingleTournament() {
     }, [id]);
 
     const [selectedTournament, setSelectedTournament] = useState([]);
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
     const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
     const [matches, setMatches] = useState([]);
 
@@ -86,7 +86,7 @@ function SingleTournament() {
         }
         setMatches(newSchedule);
         updateTournamentPlan(selectedTournament.id, newSchedule);
-        console.log(matches)
+        setIsExpanded(false);
     };
 
     const updateTournamentPlan = async (tournamentId, newPlan) => {
@@ -144,11 +144,11 @@ function SingleTournament() {
                                 <label htmlFor="matchDuration" className="col-sm-3 col-form-label">
                                     Spieldauer
                                 </label>
-                                <div className="col-sm-9 w-50" >
-                                    <div className=''>
+                                <div className="col-sm-9" >
+                                    <div className='form-control'>
                                         Minuten
-                                        <input id='matchDuration' className='w-15 text-center ' type="number" name="minutes" value={matchDuration.minutes} onChange={handleMatchDurationChange} /> :
-                                        <input className='w-15 text-center' type="number" name="seconds" value={matchDuration.seconds} onChange={handleMatchDurationChange} /> Sekunden
+                                        <input id='matchDuration' className='w-15 text-center ml-3 mr-3' type="number" name="minutes" min='0' value={matchDuration.minutes} onChange={handleMatchDurationChange} /> :
+                                        <input className='w-15 text-center ml-3 mr-3' type="number" name="seconds" min="0" value={matchDuration.seconds} onChange={handleMatchDurationChange} /> Sekunden
                                     </div>
                                 </div>
 
@@ -156,6 +156,9 @@ function SingleTournament() {
                             <div className=''>
                                 <button className="btn btn-success" onClick={handleSubmit}>
                                     Speichern
+                                </button>
+                                <button className="btn btn-primary ml-3" type="button" onClick={handleCreateRound}>
+                                    Spielrunden erstellen
                                 </button>
                             </div>
                         </div>

@@ -20,10 +20,10 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Timer({ minutes, seconds }) {
-    const [time, setTime] = useState(minutes * 60 + seconds); 
+    const [time, setTime] = useState(minutes * 60 + seconds);
     const [isActive, setIsActive] = useState(false);
     const [progress, setProgress] = useState(100);
 
@@ -48,9 +48,13 @@ function Timer({ minutes, seconds }) {
         setIsActive(false);
         setTime(minutes * 60 + seconds);
         setProgress(100);
-      };
-      
-      React.useEffect(() => {
+    };
+
+    useEffect(() => {
+        setTime(minutes * 60 + seconds);
+      }, [minutes, seconds]);
+
+    React.useEffect(() => {
         let interval;
         if (time === 0) {
             setIsActive(false);
@@ -58,23 +62,19 @@ function Timer({ minutes, seconds }) {
             setProgress(100);
             const audio = new Audio('../assets/counter.wav');
             audio.play();
-        }        
-      
-        if (isActive && time > 0) {
-          interval = setInterval(() => {
-            setTime(prevTime => prevTime - 1);
-            setProgress(prevProgress => (time / (minutes * 60 + seconds)) * 95);
-          }, 1000);
-        } else if (time === 0) {
-            setIsActive(false);
-            setTime(minutes * 60 + seconds);
-            setProgress(100);
-        } else {
-          clearInterval(interval);
         }
-      
+
+        if (isActive && time > 0) {
+            interval = setInterval(() => {
+                setTime(prevTime => prevTime - 1);
+                setProgress(prevProgress => (time / (minutes * 60 + seconds)) * 95);
+            }, 1000);
+        } else {
+            clearInterval(interval);
+        }
+
         return () => clearInterval(interval);
-      }, [isActive, time, minutes, seconds]);
+    }, [isActive, time, minutes, seconds]);
 
     return (
         <div className="timer-container container glass-green mb-5 p-3">
@@ -82,10 +82,10 @@ function Timer({ minutes, seconds }) {
             <div className="timer-buttons mt-3">
                 <button className='btn btn-primary' onClick={toggleTimer}>{isActive ? 'Pause' : 'Start'}</button>
                 <svg className='circle' viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" data-value={progress}>
-                <circle r="45" cx="50" cy="50" />
-                <path className="meter" d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0" strokeLinecap="round" strokeLinejoin="round" strokeDashoffset="282.78302001953125" strokeDasharray="282.78302001953125" />
-                <text className="timer-text" x="50" y="60" textAnchor='middle'>{formatTime(time)}</text>
-            </svg>
+                    <circle r="45" cx="50" cy="50" />
+                    <path className="meter" d="M5,50a45,45 0 1,0 90,0a45,45 0 1,0 -90,0" strokeLinecap="round" strokeLinejoin="round" strokeDashoffset="282.78302001953125" strokeDasharray="282.78302001953125" />
+                    <text className="timer-text" x="50" y="60" textAnchor='middle'>{formatTime(time)}</text>
+                </svg>
                 <button className='btn btn-primary' onClick={resetTimer}>Reset</button>
             </div>
         </div>

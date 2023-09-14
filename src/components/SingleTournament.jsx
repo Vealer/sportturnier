@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, {  useState, } from 'react';
 import { useParams } from 'react-router-dom';
 import MatchTable from './MatchTable';
 import TeamTable from './TeamTable';
@@ -8,7 +8,7 @@ import _ from 'lodash';
 function SingleTournament({ formData }) {
     const { id } = useParams();
     const selectedTournament = formData[id];
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
     const [matches, setMatches] = useState([]);
@@ -55,7 +55,6 @@ function SingleTournament({ formData }) {
         return shuffled;
     };
 
-
     const handleCreateRound = () => {
         if (teamNames.length % 2 !== 0) teamNames.push('Spielfrei');
         let shuffledTeams = shuffleArray(teamNames);
@@ -76,7 +75,7 @@ function SingleTournament({ formData }) {
             shuffledTeams.unshift(shuffledTeams.shift(), shuffledTeams.pop());
         }
         setMatches(newSchedule);
-        console.log(matches)
+        setIsExpanded(false);
     };
 
 
@@ -87,8 +86,8 @@ function SingleTournament({ formData }) {
                     <h2 class="card-title"><strong>{_.capitalize(selectedTournament.name)} Turnier</strong></h2>
                     <h3 class="card-text mt-4"><strong>Veranstalter:</strong> {selectedTournament.organizer}</h3>
                     <div class="row text-center display-flex justify-content-center mt-4 gap-3">
-                            <h3 class="card-text mr-3"><strong>Ort:</strong> {selectedTournament.location}</h3>
-                            <h3 class="card-text"><strong>Datum:</strong> {selectedTournament.selectedDate}</h3>
+                        <h3 class="card-text mr-3"><strong>Ort:</strong> {selectedTournament.location}</h3>
+                        <h3 class="card-text"><strong>Datum:</strong> {selectedTournament.selectedDate}</h3>
                     </div>
                     <button className="btn btn-primary mt-2" onClick={handleExpandClick}>
                         Einstellungen
@@ -115,11 +114,11 @@ function SingleTournament({ formData }) {
                                 <label htmlFor="matchDuration" className="col-sm-3 col-form-label">
                                     Spieldauer
                                 </label>
-                                <div className="col-sm-9 w-50" >
-                                    <div className=''>
+                                <div className="col-sm-9" >
+                                    <div className='form-control'>
                                         Minuten
-                                        <input id='matchDuration' className='w-15 text-center ' type="number" name="minutes" value={matchDuration.minutes} onChange={handleMatchDurationChange} /> :
-                                        <input className='w-15 text-center' type="number" name="seconds" value={matchDuration.seconds} onChange={handleMatchDurationChange} /> Sekunden
+                                        <input id='matchDuration' className='w-15 text-center ml-3 mr-3' type="number" name="minutes" min='0' value={matchDuration.minutes} onChange={handleMatchDurationChange} /> :
+                                        <input className='w-15 text-center ml-3 mr-3' type="number" name="seconds" min="0" value={matchDuration.seconds} onChange={handleMatchDurationChange} /> Sekunden
                                     </div>
                                 </div>
 
@@ -127,6 +126,9 @@ function SingleTournament({ formData }) {
                             <div className=''>
                                 <button className="btn btn-success" onClick={handleSubmit}>
                                     Speichern
+                                </button>
+                                <button className="btn btn-primary ml-3" type="button" onClick={handleCreateRound}>
+                                    Spielrunden erstellen
                                 </button>
                             </div>
                         </div>
@@ -139,9 +141,7 @@ function SingleTournament({ formData }) {
                 updatedSchedule[roundIndex] = updatedMatches;
                 setMatches(updatedSchedule);
             }} />))}
-            <button className="btn btn-primary mb-5" type="button" onClick={handleCreateRound}>
-                Spielrunde erstellen
-            </button>
+
             <div className="container mb-5">
                 <TeamTable matches={matches} discipline={selectedTournament.name} />
             </div>
