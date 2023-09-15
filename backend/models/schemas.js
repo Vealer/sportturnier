@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose')
 const Schema = mongoose.Schema;
 
 
@@ -7,6 +8,8 @@ const userSchema = new Schema({
     password: { type: String },
     entryDate: { type: Date, default: Date.now() },
 })
+
+userSchema.plugin(passportLocalMongoose);
 
 const contactSchema = new Schema({
     name: { type: String, required: true },

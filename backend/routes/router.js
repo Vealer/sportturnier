@@ -6,23 +6,23 @@ var currentUserID = "guest";
 
 
   // Anmelderoute
-router.post('/signIn', async (req, res) => {
-    const { userName, password } = req.body;
-    try {
-      const user = await schemas.Users.findOne({ username: userName }).exec();
-      if (user && user.password === password) {
-        // Sitzungsvariable setzen
-        // req.session.currentUser = user.id;
-        currentUserID = user.id;
-        res.status(200).send('OK');
-      } else {
-        res.status(401).send('Invalid username or password');
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).send('Internal server error');
-    }
-  });
+// router.post('/signIn', async (req, res) => {
+//     const { userName, password } = req.body;
+//     try {
+//       const user = await schemas.Users.findOne({ username: userName }).exec();
+//       if (user && user.password === password) {
+//         // Sitzungsvariable setzen
+//         // req.session.currentUser = user.id;
+//         currentUserID = user.id;
+//         res.status(200).send('OK');
+//       } else {
+//         res.status(401).send('Invalid username or password');
+//       }
+//     } catch (err) {
+//       console.log(err);
+//       res.status(500).send('Internal server error');
+//     }
+//   });
 
 router.post('/contact', async (req, res) => {
   const { email, website, message } = req.body;
