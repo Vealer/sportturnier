@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const passport = require('passport')
 // const passportLocalMongoose = require('passport-local-mongoose')
-const schemas = require('../models/schemas');
+const schemas = require('./models/schemas');
 
 
 require('dotenv').config()
@@ -44,7 +44,7 @@ mongoose.connect(process.env.MONGODB_URI, dbOptions)
     .then(() => console.log('DB connection established'))
     .catch(err => console.error(err))
 // angelu
-mongoose.set("useCreateIndex", true);
+// mongoose.set("useCreateIndex", true);
 
 passport.use(schemas.Users.createStrategy());
 
