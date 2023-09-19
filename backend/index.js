@@ -5,14 +5,9 @@ const router = require('./routes/router')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const passport = require('passport')
-// const passportLocalMongoose = require('passport-local-mongoose')
 const schemas = require('./models/schemas');
-
-
 require('dotenv').config()
-
 const app = express()
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,71 +28,96 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use('/', router);
-
-
 
 
 const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true }
 mongoose.connect(process.env.MONGODB_URI, dbOptions)
     .then(() => console.log('DB connection established'))
     .catch(err => console.error(err))
-// angelu
-// mongoose.set("useCreateIndex", true);
 
-passport.use(schemas.Users.createStrategy());
+// Passport configuration
 
-passport.serializeUser(schemas.Users.serializeUser());
-passport.deserializeUser(schemas.Users.deserializeUser());
+passport.use(schemas.User.createStrategy());
 
+passport.serializeUser(schemas.User.serializeUser());
+passport.deserializeUser(schemas.User.deserializeUser());
+
+
+//hier gehts weier
 app.get('/secrets', function (req, res) {
     if (req.isAuthenticated()) {
-        res.redirect('/tournamtentsDB');
+        res.status(200).send('OK');
+        // res.redirect('/tournamtentsDB');
     } else {
         res.redirect('/login');
     }
 });
 
-app.post("/register", function (req, res) {
-
-    schemas.Users.register({ username: req.params.username }, req.body.password, function (err, user) {
-        if (err) {
-            console.error(err);
-            res.redirect('/register')
-        } else {
-            passport.authenticate('local')(req, res, function () {
-                res.redirect('/secrets');
-            })
-        }
-    });
-
-})
-
-app.post('/signIn', async (req, res) => {
+app.post("/register", function (req, res, next) {
     const { userName, password } = req.body;
-    const user = new schemas.Users({
-        username: userName,
-        password: password
-    });
-    req.login(user, function (err, user) {
+    schemas.User.register({ username: userName }, password, function (err, user) {
         if (err) {
             console.error(err);
-        } else {
-            passport.authenticate('local')(req, res, function () {
-                res.redirect('/secrets');
-            })
+            return res.send(err);
         }
+
+        // Logge den Benutzer ein, nachdem er sich registriert hat
+        req.login(user, function (err) {
+            if (err) {
+                console.error(err);
+                return next(err);
+            }
+            console.log(user);
+            return res.status(200).send('OK');
+        });
     });
 });
 
-app.get('/logout', function(req, res){
+
+
+
+app.post('/signIn', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
+            console.error('Authentication error:', err);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid username or password.' });
+        }
+        console.log('bis hier')
+        req.logIn(user, function (err) {
+            if (err) {
+                console.error('Login error:', err);
+                return res.status(500).json({ message: 'Failed to login user.' });
+            }
+            console.log('User logged in:', user);
+            return res.status(200).json({ message: 'OK', userId: user._id });
+        });
+    })(req, res, next);
+});
+
+
+
+
+app.get('/user', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.send(JSON.stringify(req.user._id))
+    } else {
+        console.log('kein user is not logged in')
+        res.status(404).send('User not found');
+
+    }
+});
+
+app.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/login');
 })
 
 const port = process.env.PORT || 4000
-const server = app.listen(port, () => {
+app.listen(port, () => {
     console.log('listening on port ' + port)
 })
 

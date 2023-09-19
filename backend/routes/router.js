@@ -127,14 +127,7 @@ router.delete('/tournaments/:id', async (req, res) => {
 
 
 
-router.get('/user', async (req, res) => {
-  const currentUser = await schemas.Users.findOne({ id: currentUserID }).exec();
-  if (currentUser) {
-    res.send(JSON.stringify(currentUser))
-  }
 
-  res.status(404).send('User not found');
-})
 
 router.post('/addUser', async (req, res) => {
   const { userName, password } = req.body;

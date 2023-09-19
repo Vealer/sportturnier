@@ -28,9 +28,9 @@ const tournamentSchema = new Schema({
     plan: { type: Object, required: true },
 });
 
-const Users = mongoose.model('Users', userSchema, 'users');
+const User = mongoose.model('User', userSchema, 'users');
 const Tournaments = mongoose.model('Tournaments', tournamentSchema, 'turniere');
 const Contact = mongoose.model('Contact', contactSchema, 'contact_form');
-const mySchemas = { 'Users': Users, 'Contact': Contact, 'Tournaments': Tournaments }
+const mySchemas = { 'User': User, 'Contact': Contact, 'Tournaments': Tournaments }
 
 module.exports = mySchemas;

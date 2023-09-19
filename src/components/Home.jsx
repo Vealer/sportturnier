@@ -57,13 +57,13 @@ function Home({ getLoginStatus, isLogged }) {
             </form>
             }
             <div className=' mt-5 mb-5 container glass-dark p-4  col-md-10 text-white'>
-              <h3>Unsere App ist die perfekte Wahl, wenn Sie Ihre Turniere organisieren und verwalten möchten.</h3>
+              {/* <h3>Unsere App ist die perfekte Wahl, wenn Sie Ihre Turniere organisieren und verwalten möchten.</h3>
               <h3>Wenn Sie sich registrieren, können Sie Ihre Turniere speichern und zwischen verschiedenen Turnieren wechseln, die gleichzeitig ausgetragen werden.</h3>
               <h3>Unsere App unterstützt verschiedene Sportarten und kann Teilnehmer-Teams nach dem Zufallsprinzip matchen. Außerdem zeigt sie Ihnen die Tabelle an, damit Sie immer auf dem Laufenden sind.</h3>
               <h3>Sie können auch Teams benennen und einen Countdown nutzen, um sicherzustellen, dass Sie immer im Zeitplan bleiben.</h3>
               <h3>Registrieren Sie sich jetzt und erleichtern Sie sich die Organisation Ihrer Turniere!</h3>
               <h3>Wenn Sie die App nur gelegentlich nutzen möchten, haben Sie auch die Möglichkeit, sich als Gast anzumelden und die App ohne Registrierung zu nutzen. Beachten Sie jedoch, dass Sie in diesem Fall keine Turniere speichern oder zwischen verschiedenen Turnieren wechseln können.</h3>
-              <h2>Wir wünschen allen Besuchern unserer App viel Spaß und tolle sportliche Erlebnisse!</h2>
+              <h2>Wir wünschen allen Besuchern unserer App viel Spaß und tolle sportliche Erlebnisse!</h2> */}
             </div>
           </div>
         </div>

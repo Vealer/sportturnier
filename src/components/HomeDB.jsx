@@ -17,7 +17,8 @@ function Home({ getLoginStatus, isLogged }) {
   const handleAddUserSubmit = async (event) => {
     validation(event);
     try {
-      const response = await fetch('/addUser', {
+      // const response = await fetch('/addUser', {
+        const response = await fetch('/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userName: userName, password: userPassword })
@@ -26,6 +27,7 @@ function Home({ getLoginStatus, isLogged }) {
         navigate('/new-competitionDB');
         getLoginStatus(true);
       } else {
+        console.error(response.message);
         setAddUserError('Der Benutzername existiert bereits. Wähle einen anderen!');
       }
     } catch (err) {
@@ -92,6 +94,7 @@ function Home({ getLoginStatus, isLogged }) {
               <button type="submit" className="btn btn-success mt-3 ml-3" onClick={handleAddUserSubmit}>Registrieren</button>
             </form>
             }
+            <a href='/user' alt="user">button</a>
             <div className=' mt-5 mb-5 container glass-dark p-4  col-md-10 text-white'>
               <h3>Unsere App ist die perfekte Wahl, wenn Sie Ihre Turniere organisieren und verwalten möchten.</h3>
               <h3>Wenn Sie sich registrieren, können Sie Ihre Turniere speichern und zwischen verschiedenen Turnieren wechseln, die gleichzeitig ausgetragen werden.</h3>
