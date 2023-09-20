@@ -43,8 +43,6 @@ passport.use(schemas.User.createStrategy());
 passport.serializeUser(schemas.User.serializeUser());
 passport.deserializeUser(schemas.User.deserializeUser());
 
-
-//hier gehts weier
 app.get('/secrets', function (req, res) {
     if (req.isAuthenticated()) {
         res.status(200).send('OK');
