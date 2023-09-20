@@ -98,6 +98,11 @@ app.post('/signIn', function (req, res, next) {
     })(req, res, next);
 });
 
+app.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }), function(req, res) {
+    console.log(req.user.username);
+    // res.redirect('/~' + req.user.username);
+  });
+
 
 
 
