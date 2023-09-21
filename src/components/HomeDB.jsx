@@ -38,6 +38,7 @@ function Home({ getLoginStatus, isLogged }) {
 
   const handleSignInSubmit = async (event) => {
     validation(event);
+
     try {
       const response = await fetch('/signIn', {
         method: 'POST',
@@ -49,6 +50,7 @@ function Home({ getLoginStatus, isLogged }) {
         getLoginStatus(true);
       } else {
         setSignInError('Ungültiger Benutzername oder ungültiges Passwort');
+        
       }
     } catch (err) {
       console.log(err);
@@ -90,7 +92,7 @@ function Home({ getLoginStatus, isLogged }) {
                 <input type="checkbox" className="form-check-input" id="guestLogin" onChange={handleGuestLoginChange} />
                 <label className="form-check-label" htmlFor="guestLogin">Als Gast anmelden</label>
               </div>
-              <button type="submit" className="btn btn-primary mt-3">Anmelden</button>
+              <button type="submit" className="btn btn-primary mt-3" onClick={handleSignInSubmit}>Anmelden</button>
               <button type="submit" className="btn btn-success mt-3 ml-3" onClick={handleAddUserSubmit}>Registrieren</button>
             </form>
             }
