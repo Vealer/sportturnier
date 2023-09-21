@@ -41,13 +41,13 @@ function Navbar({ isLogged, getLoginStatus }) {
                         <Link className="nav-link" to={user ? "/new-competitionDB" : "/new-competition"}>Neues Turnier</Link>
                     </li>
                 </ul>
-                {isLogged && <div className="dropdown">
-                    <div className="d-flex align-items-center">
-                        <img src="../img/user.jpg" alt="User" className="navImg mr-2" data-toggle="dropdown" style={{ cursor: 'pointer' }} />
-                        <p className="mb-0">{user ? user.username : 'Gast'}</p>
-                    </div>
-                    <div className="dropdown-menu dropdown-menu-right">
-                        <button className="dropdown-item" type="button" onClick={handleLogOut}>Ausloggen</button>
+                {isLogged && <div className="dropdown ">
+                    <div className='d-flex align-items-center'>
+                        <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown" style={{cursor: 'pointer'}}/>
+                        <p className="mb-0 ml-2">{user ? user.username : 'Gast'}</p>
+                        <div className="dropdown-menu dropdown-menu-right">
+                            <button className="dropdown-item" type="button" onClick={handleLogOut}>Ausloggen</button>
+                        </div>
                     </div>
                 </div>
                 }
