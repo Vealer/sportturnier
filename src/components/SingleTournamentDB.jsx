@@ -12,7 +12,8 @@ function SingleTournament() {
         const fetchTournament = async () => {
             const data = await fetch('/singleTournament/' + id);
             const tournament = await data.json();
-            setSelectedTournament(tournament);
+            setSelectedTournament(tournament[0]);
+            console.log(tournament);
         };
         fetchTournament();
     }, [id]);
@@ -23,7 +24,7 @@ function SingleTournament() {
     const [matches, setMatches] = useState([]);
 
     const defaultTeamNames = [];
-    for (let index = 1; index <= selectedTournament.teams; index++) {
+    for (let index = 1; index <= selectedTournament.amount; index++) {
         defaultTeamNames.push(`Team ${index}`);
     }
     const [teamNames, setTeamNames] = useState(defaultTeamNames);
@@ -113,11 +114,11 @@ function SingleTournament() {
         <div class="container">
             <div class="card mb-5 mt-5 glass-white shadow-lg text-center">
                 <div class="card-body">
-                    <h2 class="card-title"><strong>{_.capitalize(selectedTournament.name)} Turnier</strong></h2>
-                    <h3 class="card-text mt-4"><strong>Veranstalter:</strong> {selectedTournament.organizer}</h3>
+                    <h2 class="card-title"><strong>{_.capitalize( selectedTournament.sport)} Turnier</strong></h2>
+                    <h3 class="card-text mt-4"><strong>Veranstalter:</strong> { selectedTournament.organizer}</h3>
                     <div class="row text-center display-flex justify-content-center mt-4 gap-3">
                         <h3 class="card-text mr-3"><strong>Ort:</strong> {selectedTournament.location}</h3>
-                        <h3 class="card-text"><strong>Datum:</strong> {selectedTournament.selectedDate}</h3>
+                        <h3 class="card-text"><strong>Datum:</strong> {selectedTournament.date}</h3>
                     </div>
                     <button className="btn btn-primary mt-2" onClick={handleExpandClick}>
                         Einstellungen
@@ -166,20 +167,19 @@ function SingleTournament() {
                 </div>
             </div>
             <Timer minutes={matchDuration.minutes} seconds={matchDuration.seconds} />
-            {/* {matches.length > 0 && matches.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => { */}
-            {selectedTournament.plan.length > 0 && selectedTournament.plan.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
+            {/* { selectedTournament && selectedTournament.plan.length > 0 && selectedTournament.plan.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
                 const updatedSchedule = [...matches];
                 updatedSchedule[roundIndex] = updatedMatches;
                 setMatches(updatedSchedule);
                 updateTournamentPlan(selectedTournament.id, updatedSchedule);
 
-            }} />))}
+            }} />))} */}
             <button className="btn btn-primary mb-5" type="button" onClick={handleCreateRound}>
                 Spielrunde erstellen
             </button>
-            <div className="container mb-5">
+            {/* <div className="container mb-5">
                 <TeamTable matches={selectedTournament.plan} discipline={selectedTournament.name} />
-            </div>
+            </div> */}
         </div>
     );
 }

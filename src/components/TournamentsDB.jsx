@@ -28,7 +28,7 @@ function TournamentsDB() {
 
     const handleDelete = async (event, index) => {
         event.stopPropagation();
-        const tournamentID = tournaments[index].id;
+        const tournamentID = tournaments[index]._id.toString();
         const response = await fetch(`/tournaments/${tournamentID}`, { method: 'DELETE' });
         if (response.ok) {
             fetchTournaments();
@@ -52,7 +52,7 @@ function TournamentsDB() {
                                 )}
                                 <img className="card-img-top" src={`/img/${data.sport + '.jpg'}`} alt="Card cap" />
                                 <div className="card-body">
-                                    <Link to={`/tournamentDB/${tournaments[index].id}`} className="text-decoration-none">
+                                    <Link to={`/singleTournament/${tournaments[index]._id.toString()}`} className="text-decoration-none">
 
                                         <div className='text-decoration-none'>
                                             <h2> {_.capitalize(data.name)} Turnier </h2>

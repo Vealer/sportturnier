@@ -5,6 +5,7 @@ import CompetitionDB from './components/CompetitionDB';
 import Tournaments from './components/Tournaments';
 import TournamentsDB from './components/TournamentsDB';
 import SingleTournament from './components/SingleTournament';
+import SingleTournamentDB from './components/SingleTournamentDB';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
@@ -45,10 +46,10 @@ function App() {
           <Route path="/login" exact element={<HomeDB isLogged={isLoggedIn}  getLoginStatus={changeLogin}/>} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
           <Route path="/new-competitionDB" element={<CompetitionDB  />} />
-          <Route path="/tournaments" element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament}/>} />
-          <Route path="/tournamentsDB" element={<TournamentsDB />} />
+          <Route path="/tournaments" exact element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament}/>} />
+          <Route path="/tournamentsDB" exact element={<TournamentsDB />} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
-          <Route path="/tournamentDB/:id" exact element={<SingleTournament />} />
+          <Route path="/singleTournament/:id" exact element={<SingleTournamentDB />} />
           <Route path="/datenschutz" element={<PrivacyPolicy />} />
 
         </Routes>

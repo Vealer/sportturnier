@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-function CompetitionDB({onFormSubmit}) {
-    const navigate = useNavigate();
+function CompetitionDB({}) {
     const [formDataSet, setFormDataSet] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
     const [organizer, setOrganizer] = useState('');

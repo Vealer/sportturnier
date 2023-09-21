@@ -3,37 +3,6 @@ const router = express.Router();
 const schemas = require('../models/schemas');
 var currentUserID = "guest";
 
-
-
-  // Anmelderoute
-// router.post('/signIn', async (req, res) => {
-//     const { userName, password } = req.body;
-//     try {
-//       const user = await schemas.Users.findOne({ username: userName }).exec();
-//       if (user && user.password === password) {
-//         // Sitzungsvariable setzen
-//         // req.session.currentUser = user.id;
-//         currentUserID = user.id;
-//         res.status(200).send('OK');
-//       } else {
-//         res.status(401).send('Invalid username or password');
-//       }
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).send('Internal server error');
-//     }
-//   });
-
-router.post('/contact', async (req, res) => {
-  const { email, website, message } = req.body;
-  const contactData = { email: email, website: website, message: message }
-  const newContact = new schemas.Contact(contactData)
-  const saveContact = await newContact.save()
-  if (saveContact) res.send('Message sent. Thank you.')
-
-  res.end()
-})
-
 router.post('/addTournament', async (req, res) => {
   const { sport, organizer, amount, location, tdate } = req.body;
   const newTournament = new schemas.Tournaments({
@@ -41,7 +10,7 @@ router.post('/addTournament', async (req, res) => {
     location: location,
     sport: sport,
     amount: amount,
-    user: currentUserID,
+    user: req.user._id.toString(),
     date: tdate,
     plan: {team: 'Holzbein'},
   });
@@ -59,13 +28,12 @@ router.post('/addTournament', async (req, res) => {
       console.log(err);
       res.redirect('/new-competitionDB');
     });
-  res.end()
 })
 
 
 router.get('/tournaments', async (req, res) => {
   const tournaments = schemas.Tournaments;
-  tournaments.find({ user: currentUserID }).exec()
+  tournaments.find({ user: req.user._id.toString() }).exec()
     .then(tournamentData => {
       if (tournamentData) res.send(tournamentData);
     })
@@ -77,7 +45,7 @@ router.get('/tournaments', async (req, res) => {
 
 router.get('/singleTournament/:id', async (req, res) => {
   const tournaments = schemas.Tournaments;
-  tournaments.find({ id: req.params.id }).exec()
+  tournaments.find({ _id: req.params.id }).exec()
     .then(tournamentData => {
       if (tournamentData) res.send(tournamentData);
     })
