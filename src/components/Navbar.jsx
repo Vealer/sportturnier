@@ -7,19 +7,20 @@ function Navbar({ isLogged, getLoginStatus }) {
 
     useEffect(() => {
         fetchUser();
-    }, []);
+    }, [getLoginStatus]);
 
     const [user, setUser] = useState([]);
 
     const fetchUser = async () => {
-        const user = await fetch('/user');
+        const data = await fetch('/user');
+        const user = await data.json();
         setUser(user);
     };
 
     const handleLogOut = (e) => {
         navigate('/login');
         getLoginStatus(false);
-      };
+    };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,15 +35,17 @@ function Navbar({ isLogged, getLoginStatus }) {
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li className={`nav-item ${location.pathname === '/tournamentsDB' ? 'active' : ''}`}>
-                        <Link className="nav-link" to={ user ? "/tournamentsDB" : "/tournaments" }>Turniere</Link>
+                        <Link className="nav-link" to={user ? "/tournamentsDB" : "/tournaments"}>Turniere</Link>
                     </li>
                     <li className={`nav-item ${location.pathname === '/new-competitionDB' ? 'active' : ''}`}>
-                        <Link className="nav-link" to={ user ? "/new-competitionDB" : "/new-competition" }>Neues Turnier</Link>
+                        <Link className="nav-link" to={user ? "/new-competitionDB" : "/new-competition"}>Neues Turnier</Link>
                     </li>
                 </ul>
                 {isLogged && <div className="dropdown">
-                    <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown" />
-                    <p>{user ? user.username : 'Gast'}</p>
+                    <div className="d-flex align-items-center">
+                        <img src="../img/user.jpg" alt="User" className="navImg mr-2" data-toggle="dropdown" style={{ cursor: 'pointer' }} />
+                        <p className="mb-0">{user ? user.username : 'Gast'}</p>
+                    </div>
                     <div className="dropdown-menu dropdown-menu-right">
                         <button className="dropdown-item" type="button" onClick={handleLogOut}>Ausloggen</button>
                     </div>

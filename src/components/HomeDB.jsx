@@ -21,7 +21,7 @@ function Home({ getLoginStatus, isLogged }) {
         const response = await fetch('/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userName: userName, password: userPassword })
+        body: JSON.stringify({ username: userName, password: userPassword })
       });
       if (response.ok) {
         navigate('/new-competitionDB');
@@ -43,7 +43,7 @@ function Home({ getLoginStatus, isLogged }) {
       const response = await fetch('/signIn', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userName: userName, password: userPassword })
+        body: JSON.stringify({ username: userName, password: userPassword })
       });
       if (response.ok) {
         navigate('/new-competitionDB');
@@ -80,7 +80,7 @@ function Home({ getLoginStatus, isLogged }) {
             {!isLogged && <form className="col-md-10 container glass-white" onSubmit={handleSignInSubmit}>
               <div className="form-group">
                 <label htmlFor="userName">Benutzername</label>
-                <input type="text" className="form-control" name="userName" value={userName} placeholder="Benutzername" onChange={(e) => setUserName(e.target.value)} minLength="5" required />
+                <input type="text" className="form-control" name="username" value={userName} placeholder="Benutzername" onChange={(e) => setUserName(e.target.value)} minLength="5" required />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Passwort</label>

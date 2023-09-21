@@ -53,8 +53,8 @@ app.get('/secrets', function (req, res) {
 });
 
 app.post("/register", function (req, res, next) {
-    const { userName, password } = req.body;
-    schemas.User.register({ username: userName }, password, function (err, user) {
+    const { username, password } = req.body;
+    schemas.User.register({ username: username }, password, function (err, user) {
         if (err) {
             console.error(err);
             return res.send(err);
@@ -76,51 +76,31 @@ app.post("/register", function (req, res, next) {
 
 
 
-// app.post('/signIn', function (req, res, next) {
-    //     passport.authenticate('local', function (err, user, info) {
-    //         if (err) {
-    //             console.error('Authentication error:', err);
-    //             return res.status(500).json({ message: 'Internal server error' });
-    //         }
-    //         if (!user) {
-    //             return res.status(401).json({ message: 'Invalid username or password.' });
-    //         }
-    //         console.log('bis hier')
-    //         req.logIn(user, function (err) {
-    //             if (err) {
-    //                 console.error('Login error:', err);
-    //                 return res.status(500).json({ message: 'Failed to login user.' });
-    //             }
-    //             console.log('User logged in:', user);
-    //             return res.status(200).json({ message: 'OK', userId: user._id });
-    //         });
-    //     })(req, res, next);
-//     console.log(req.user);
-//     req.login(req.user, function (err) {
-//         if (err) {
-//             console.error(err);
-//             return next(err);
-//         }
-//         console.log(req.user.username);
-//         return res.status(200).send('OK');
-//     });
-
-// });
-
-
-
-app.post('/signIn', passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }), function (req, res) {
-    console.log(req.user.username);
-    res.status(200).send('OK');
-    // res.redirect('/~' + req.user.username);
+app.post('/signIn', function (req, res, next) {
+        passport.authenticate('local', function (err, user, info) {
+            if (err) {
+                console.error('Authentication error:', err);
+                return res.status(500).json({ message: 'Internal server error' });
+            }
+            if (!user) {
+                return res.status(401).json({ message: 'Invalid username or password.' });
+            }
+            req.logIn(user, function (err) {
+                if (err) {
+                    console.error('Login error:', err);
+                    return res.status(500).json({ message: 'Failed to login user.' });
+                }
+                console.log('User logged in:', user);
+                return res.status(200).json({ message: 'OK', userId: user._id });
+            });
+        })(req, res, next);
 });
-
-
 
 
 app.get('/user', function (req, res) {
     if (req.isAuthenticated()) {
-        res.send(JSON.stringify(req.user._id))
+        res.send(JSON.stringify(req.user))
+        console.log('User logged in:', req.user);
     } else {
         console.log('kein user is not logged in')
         res.status(404).send('User not found');
