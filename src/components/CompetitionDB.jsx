@@ -24,24 +24,6 @@ function CompetitionDB({}) {
         setSelectedDate(getCurrentDate());
     }, []);
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const formData = {
-    //         selectedDate,
-    //         organizer,
-    //         name,
-    //         location,
-    //         teams,
-    //     };
-    //     navigate('/tournaments');
-    //     setFormDataSet([...formDataSet, formData]);
-    //     onFormSubmit(formData);
-    //     resetForm();
-    // };
-
-    // const resetForm = () =>{
-
-
     return (
         <div className="container d-flex justify-content-center mt-5 ">
             <form className='glass-green' method='POST' action='/addTournament'>
