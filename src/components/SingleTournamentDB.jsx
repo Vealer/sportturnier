@@ -176,7 +176,7 @@ function SingleTournament() {
                 </div>
             </div>
             <Timer minutes={matchDuration.minutes} seconds={matchDuration.seconds} />
-            { selectedTournament && isPlanned && selectedTournament.plan.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
+            {selectedTournament && isPlanned && selectedTournament.plan.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
                 const updatedSchedule = [...matches];
                 updatedSchedule[roundIndex] = updatedMatches;
                 setMatches(updatedSchedule);
@@ -184,9 +184,9 @@ function SingleTournament() {
 
             }} />))}
 
-            <div className="container mb-5">
+            {selectedTournament && isPlanned && <div className="container mb-5">
                 <TeamTable matches={selectedTournament.plan} discipline={selectedTournament.name} />
-            </div>
+            </div>}
         </div>
     );
 }
