@@ -22,6 +22,7 @@ function SingleTournament() {
     const [isExpanded, setIsExpanded] = useState(true);
     const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
     const [matches, setMatches] = useState([]);
+    const [isPlanned, setIsPlanned] = useState(false);
 
     const defaultTeamNames = [];
     for (let index = 1; index <= selectedTournament.amount; index++) {
@@ -95,6 +96,7 @@ function SingleTournament() {
         setMatches(newSchedule);
         updateTournamentPlan(selectedTournament._id, newSchedule);
         setIsExpanded(false);
+        setIsPlanned(true);
     };
 
     const updateTournamentPlan = async (tournamentId, newPlan) => {
@@ -174,19 +176,17 @@ function SingleTournament() {
                 </div>
             </div>
             <Timer minutes={matchDuration.minutes} seconds={matchDuration.seconds} />
-            {/* { selectedTournament && selectedTournament.plan.length > 0 && selectedTournament.plan.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
+            { selectedTournament && isPlanned && selectedTournament.plan.map((match, roundIndex) => (<MatchTable key={roundIndex} index={roundIndex + 1} matches={match} setMatches={(updatedMatches) => {
                 const updatedSchedule = [...matches];
                 updatedSchedule[roundIndex] = updatedMatches;
                 setMatches(updatedSchedule);
                 updateTournamentPlan(selectedTournament._id, updatedSchedule);
 
-            }} />))} */}
-            <button className="btn btn-primary mb-5" type="button" onClick={handleCreateRound}>
-                Spielrunde erstellen
-            </button>
-            {/* <div className="container mb-5">
+            }} />))}
+
+            <div className="container mb-5">
                 <TeamTable matches={selectedTournament.plan} discipline={selectedTournament.name} />
-            </div> */}
+            </div>
         </div>
     );
 }
