@@ -62,7 +62,7 @@ router.put('/setTournamentPlan/:id', async (req, res) => {
 
   try {
     const tournament = await tournaments.findOneAndUpdate(
-      { id: tournamentId },
+      { _id: tournamentId },
       { plan: newPlan },
       { new: true }
     );
@@ -92,8 +92,6 @@ router.delete('/tournaments/:id', async (req, res) => {
     res.status(500).send('Internal server error');
   }
 });
-
-
 
 
 

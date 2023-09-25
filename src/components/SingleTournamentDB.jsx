@@ -67,8 +67,14 @@ function SingleTournament() {
 
 
     const handleCreateRound = () => {
-        if (teamNames.length % 2 !== 0) teamNames.push('Spielfrei');
-        let shuffledTeams = shuffleArray(teamNames);
+        let shuffledTeams;
+        if (teamNames.length > 0) {
+            if (teamNames.length % 2 !== 0) teamNames.push('Spielfrei');
+            shuffledTeams = shuffleArray(teamNames);
+        } else {
+            if (defaultTeamNames.length % 2 !== 0) defaultTeamNames.push('Spielfrei');
+            shuffledTeams = shuffleArray(defaultTeamNames);
+        }
         const newSchedule = [];
         let schedule = [];
         for (let i = 0; i < shuffledTeams.length - 1; i++) {
@@ -85,8 +91,9 @@ function SingleTournament() {
             schedule = [];
             shuffledTeams.unshift(shuffledTeams.shift(), shuffledTeams.pop());
         }
+        console.log(selectedTournament._id)
         setMatches(newSchedule);
-        updateTournamentPlan(selectedTournament.id, newSchedule);
+        updateTournamentPlan(selectedTournament._id, newSchedule);
         setIsExpanded(false);
     };
 
@@ -114,8 +121,8 @@ function SingleTournament() {
         <div class="container">
             <div class="card mb-5 mt-5 glass-white shadow-lg text-center">
                 <div class="card-body">
-                    <h2 class="card-title"><strong>{_.capitalize( selectedTournament.sport)} Turnier</strong></h2>
-                    <h3 class="card-text mt-4"><strong>Veranstalter:</strong> { selectedTournament.organizer}</h3>
+                    <h2 class="card-title"><strong>{_.capitalize(selectedTournament.sport)} Turnier</strong></h2>
+                    <h3 class="card-text mt-4"><strong>Veranstalter:</strong> {selectedTournament.organizer}</h3>
                     <div class="row text-center display-flex justify-content-center mt-4 gap-3">
                         <h3 class="card-text mr-3"><strong>Ort:</strong> {selectedTournament.location}</h3>
                         <h3 class="card-text"><strong>Datum:</strong> {selectedTournament.date}</h3>
@@ -171,7 +178,7 @@ function SingleTournament() {
                 const updatedSchedule = [...matches];
                 updatedSchedule[roundIndex] = updatedMatches;
                 setMatches(updatedSchedule);
-                updateTournamentPlan(selectedTournament.id, updatedSchedule);
+                updateTournamentPlan(selectedTournament._id, updatedSchedule);
 
             }} />))} */}
             <button className="btn btn-primary mb-5" type="button" onClick={handleCreateRound}>
