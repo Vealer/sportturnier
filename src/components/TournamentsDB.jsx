@@ -52,7 +52,7 @@ function TournamentsDB() {
                                 )}
                                 <img className="card-img-top" src={`/img/${data.sport + '.jpg'}`} alt="Card cap" />
                                 <div className="card-body">
-                                    <Link to={`/singleTournament/${tournaments[index]._id.toString()}`} className="text-decoration-none">
+                                    <Link to={`/singleTournamentDB/${tournaments[index]._id.toString()}`} className="text-decoration-none">
 
                                         <div className='text-decoration-none'>
                                             <h2> {_.capitalize(data.name)} Turnier </h2>

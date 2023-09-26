@@ -7,22 +7,27 @@ import _ from 'lodash';
 
 function SingleTournament() {
     const { id } = useParams();
+    const [isPlanned, setIsPlanned] = useState(false);
+    const [selectedTournament, setSelectedTournament] = useState([]);
+    const [isExpanded, setIsExpanded] = useState(true);
+    const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
+    const [matches, setMatches] = useState([]);
+
 
     useEffect(() => {
         const fetchTournament = async () => {
-            const data = await fetch('/singleTournament/' + id);
+            const data = await fetch('/singleTournamentDB/' + id);
             const tournament = await data.json();
             setSelectedTournament(tournament[0]);
+            if(tournament[0].plan.length > 1){
+                setIsPlanned(true);
+                setIsExpanded(false);
+            } 
             console.log(tournament);
         };
         fetchTournament();
     }, [id]);
 
-    const [selectedTournament, setSelectedTournament] = useState([]);
-    const [isExpanded, setIsExpanded] = useState(true);
-    const [matchDuration, setMatchDuration] = useState({ minutes: 15, seconds: 0 });
-    const [matches, setMatches] = useState([]);
-    const [isPlanned, setIsPlanned] = useState(false);
 
     const defaultTeamNames = [];
     for (let index = 1; index <= selectedTournament.amount; index++) {
@@ -67,7 +72,7 @@ function SingleTournament() {
     };
 
 
-    const handleCreateRound = () => {
+    const handleCreateRound = async () => {
         let shuffledTeams;
         if (teamNames.length > 0) {
             if (teamNames.length % 2 !== 0) teamNames.push('Spielfrei');
@@ -94,7 +99,7 @@ function SingleTournament() {
         }
         console.log(selectedTournament._id)
         setMatches(newSchedule);
-        updateTournamentPlan(selectedTournament._id, newSchedule);
+        await updateTournamentPlan(selectedTournament._id, newSchedule);
         setIsExpanded(false);
         setIsPlanned(true);
     };
@@ -168,7 +173,7 @@ function SingleTournament() {
                                     Speichern
                                 </button>
                                 <button className="btn btn-primary ml-3" type="button" onClick={handleCreateRound}>
-                                    Spielrunden erstellen
+                                    {isPlanned ? 'Spielrunden neu erstellen' : 'Spielrunden erstellen'}
                                 </button>
                             </div>
                         </div>

@@ -43,7 +43,7 @@ router.get('/tournaments', async (req, res) => {
     });
 });
 
-router.get('/singleTournament/:id', async (req, res) => {
+router.get('/singleTournamentDB/:id', async (req, res) => {
   const tournaments = schemas.Tournaments;
   tournaments.find({ _id: req.params.id }).exec()
     .then(tournamentData => {

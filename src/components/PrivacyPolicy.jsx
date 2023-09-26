@@ -22,7 +22,7 @@ function PrivacyPolicy() {
                 </p>
                 <h3>Kontakt</h3>
                 <p>
-                    Bei Fragen oder Bedenken zum Datenschutz kannst du uns unter <a href="mailto:datenschutz@example.com">datenschutz@example.com</a> erreichen.
+                    Bei Fragen oder Bedenken zum Datenschutz kannst du uns unter <a href="mailto:datenschutz@example.com">datenschutz@mdz.email</a> erreichen.
                 </p>
             </div>
         </div>

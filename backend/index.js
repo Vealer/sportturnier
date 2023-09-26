@@ -8,9 +8,12 @@ const passport = require('passport')
 const schemas = require('./models/schemas');
 require('dotenv').config()
 const app = express()
+const MongoStore = require('connect-mongo');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 const corsOptions = {
     origin: '*',
@@ -23,8 +26,13 @@ app.use(cors(corsOptions));
 app.use(session({
     secret: "Our little secret.",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    cookie: {
+        maxAge: 30 * 24 * 60 * 60 * 1000 // Beispiel: 30 Tage
+    }
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -77,41 +85,53 @@ app.post("/register", function (req, res, next) {
 
 
 app.post('/signIn', function (req, res, next) {
-        passport.authenticate('local', function (err, user, info) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) {
+            console.error('Authentication error:', err);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid username or password.' });
+        }
+        req.logIn(user, function (err) {
             if (err) {
-                console.error('Authentication error:', err);
-                return res.status(500).json({ message: 'Internal server error' });
+                console.error('Login error:', err);
+                return res.status(500).json({ message: 'Failed to login user.' });
             }
-            if (!user) {
-                return res.status(401).json({ message: 'Invalid username or password.' });
-            }
-            req.logIn(user, function (err) {
-                if (err) {
-                    console.error('Login error:', err);
-                    return res.status(500).json({ message: 'Failed to login user.' });
-                }
-                console.log('User logged in:', user);
-                return res.status(200).json({ message: 'OK', userId: user._id });
-            });
-        })(req, res, next);
+            console.log('User logged in:', user);
+            req.session.userId = user._id;
+            return res.status(200).json({ message: 'OK', userId: user._id });
+        });
+    })(req, res, next);
 });
 
 
 app.get('/user', function (req, res) {
+    console.log('User logged in:', req.session.userId);
     if (req.isAuthenticated()) {
         res.send(JSON.stringify(req.user))
         console.log('User logged in:', req.user);
     } else {
         console.log('kein user is not logged in')
-        res.status(404).send('User not found');
-
+        res.status(404).send([]);
     }
 });
 
+// app.get('/logout', function (req, res) {
+//     req.logout();
+//     return res.status(200).send('OK');
+// })
+
 app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/login');
-})
+    req.session.destroy(function(err) {
+        if(err) {
+            return res.status(500).send('Es gab einen Fehler beim Ausloggen.');
+        } else {
+            return res.status(200).send('OK');
+        }
+    });
+});
+
 
 const port = process.env.PORT || 4000
 app.listen(port, () => {
