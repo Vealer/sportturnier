@@ -9,9 +9,7 @@ import SingleTournamentDB from './components/SingleTournamentDB';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
-import Home from './components/Home';
 import HomeDB from './components/HomeDB';
-
 
 
 function App() {
@@ -59,34 +57,3 @@ function App() {
 }
 
 export default App;
-
-
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-
-// const MyComponent = () => {
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-
-//   const fetchData = async () => {
-//     try {
-//       const response = await axios.get(process.env.REACT_APP_API_ENDPOINT); // Verwende den API-Endpunkt aus der .env-Datei
-//       setData(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       {data.map((item) => (
-//         <p key={item.id}>{item.name}</p>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default MyComponent;

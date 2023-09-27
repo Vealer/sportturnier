@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 
-function CompetitionDB({}) {
-    const [formDataSet, setFormDataSet] = useState([]);
+function CompetitionDB() {
     const [selectedDate, setSelectedDate] = useState('');
-    const [organizer, setOrganizer] = useState('');
-    const [name, setName] = useState('Volleyball');
-    const [location, setLocation] = useState('');
-    const [teams, setTeams] = useState('2');
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -58,7 +52,7 @@ function CompetitionDB({}) {
                     </div>
                     <div className="col col-auto">
                         <select className="custom-select mr-sm-2" name='amount' required>
-                            <option defaultValue={teams}>2</option>
+                            <option defaultValue="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
