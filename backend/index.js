@@ -51,7 +51,7 @@ app.get('/secrets', function (req, res) {
     if (req.isAuthenticated()) {
         res.status(200).send('OK');
     } else {
-        res.redirect('/login');
+        res.redirect('/');
     }
 });
 

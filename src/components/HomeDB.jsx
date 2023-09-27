@@ -15,10 +15,10 @@ function Home({ getLoginStatus, isLogged }) {
   };
 
   const handleAddUserSubmit = async (event) => {
-    validation(event);
+    const login = validation(event);
+    if (!login) return false;
     try {
-      // const response = await fetch('/addUser', {
-        const response = await fetch('/register', {
+      const response = await fetch('/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: userName, password: userPassword })
@@ -37,7 +37,8 @@ function Home({ getLoginStatus, isLogged }) {
   };
 
   const handleSignInSubmit = async (event) => {
-    validation(event);
+    const login = validation(event);
+    if (!login) return false;
 
     try {
       const response = await fetch('/signIn', {
@@ -50,7 +51,7 @@ function Home({ getLoginStatus, isLogged }) {
         getLoginStatus(true);
       } else {
         setSignInError('Ungültiger Benutzername oder ungültiges Passwort');
-        
+
       }
     } catch (err) {
       console.log(err);
@@ -58,11 +59,11 @@ function Home({ getLoginStatus, isLogged }) {
     }
   };
 
-  function validation(event){
+  function validation(event) {
     event.preventDefault();
     setSignInError('');
     setAddUserError('');
-    if(userName.length < 5) {
+    if (userName.length < 5) {
       setSignInError('Der Benutzername muss mindestens 5 Zeichen lang sein!');
       return false;
     }

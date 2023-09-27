@@ -32,21 +32,19 @@ function App() {
     updatedFormDataSet.splice(tournamentIndex, 1);
     setFormDataSet(updatedFormDataSet);
   }
-  
-  
+
 
   return (
     <Router>
       <div className="App">
         <header className="App-header">
-          <Navbar isLogged={isLoggedIn} getLoginStatus={changeLogin}/>
+          <Navbar isLogged={isLoggedIn} getLoginStatus={changeLogin} />
         </header>
         <Routes>
-          <Route path="/" exact element={<Home isLogged={isLoggedIn}  getLoginStatus={changeLogin}/>} />
-          <Route path="/login" exact element={<HomeDB isLogged={isLoggedIn}  getLoginStatus={changeLogin}/>} />
+          <Route path="/" exact element={<HomeDB isLogged={isLoggedIn} getLoginStatus={changeLogin} />} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
-          <Route path="/new-competitionDB" element={<CompetitionDB  />} />
-          <Route path="/tournaments" exact element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament}/>} />
+          <Route path="/new-competitionDB" element={<CompetitionDB />} />
+          <Route path="/tournaments" exact element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament} />} />
           <Route path="/tournamentsDB" exact element={<TournamentsDB />} />
           <Route path="/tournament/:id" exact element={<SingleTournament formData={formDataSet} />} />
           <Route path="/singleTournamentDB/:id" exact element={<SingleTournamentDB />} />

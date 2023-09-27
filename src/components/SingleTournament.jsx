@@ -80,14 +80,14 @@ function SingleTournament({ formData }) {
 
 
     return (
-        <div class="container">
-            <div class="card mb-5 mt-5 glass-white shadow-lg text-center">
-                <div class="card-body">
-                    <h2 class="card-title"><strong>{_.capitalize(selectedTournament.name)} Turnier</strong></h2>
-                    <h3 class="card-text mt-4"><strong>Veranstalter:</strong> {selectedTournament.organizer}</h3>
-                    <div class="row text-center display-flex justify-content-center mt-4 gap-3">
-                        <h3 class="card-text mr-3"><strong>Ort:</strong> {selectedTournament.location}</h3>
-                        <h3 class="card-text"><strong>Datum:</strong> {selectedTournament.selectedDate}</h3>
+        <div className="container">
+            <div className="card mb-5 mt-5 glass-white shadow-lg text-center">
+                <div className="card-body">
+                    <h2 className="card-title"><strong>{_.capitalize(selectedTournament.name)} Turnier</strong></h2>
+                    <h3 className="card-text mt-4"><strong>Veranstalter:</strong> {selectedTournament.organizer}</h3>
+                    <div className="row text-center display-flex justify-content-center mt-4 gap-3">
+                        <h3 className="card-text mr-3"><strong>Ort:</strong> {selectedTournament.location}</h3>
+                        <h3 className="card-text"><strong>Datum:</strong> {selectedTournament.selectedDate}</h3>
                     </div>
                     <button className="btn btn-primary mt-2" onClick={handleExpandClick}>
                         Einstellungen
