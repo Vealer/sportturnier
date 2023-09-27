@@ -157,4 +157,24 @@ text {
   left: auto;
 }
 
+.content{
+  background-color: #e3f2fd !important;
+  color: black !important;
+  cursor: pointer;
+}
+
+.content:hover{
+  text-decoration: none !important;
+    background-image: linear-gradient(to top right,  #add5e9, #e3f2fd) !important;
+}
+
+a{
+  color: unset !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: rgb(66, 66, 66) !important;
+}
+
 
