@@ -13,8 +13,6 @@ const MongoStore = require('connect-mongo');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-
 const corsOptions = {
     origin: '*',
     credentials: true,
@@ -29,7 +27,7 @@ app.use(session({
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
     cookie: {
-        maxAge: 30 * 24 * 60 * 60 * 1000 // Beispiel: 30 Tage
+        maxAge: 30 * 24 * 60 * 60 * 1000 //  30 Tage
     }
 }));
 
@@ -44,8 +42,6 @@ mongoose.connect(process.env.MONGODB_URI, dbOptions)
     .then(() => console.log('DB connection established'))
     .catch(err => console.error(err))
 
-// Passport configuration
-
 passport.use(schemas.User.createStrategy());
 
 passport.serializeUser(schemas.User.serializeUser());
@@ -54,7 +50,6 @@ passport.deserializeUser(schemas.User.deserializeUser());
 app.get('/secrets', function (req, res) {
     if (req.isAuthenticated()) {
         res.status(200).send('OK');
-        // res.redirect('/tournamtentsDB');
     } else {
         res.redirect('/login');
     }
@@ -68,20 +63,15 @@ app.post("/register", function (req, res, next) {
             return res.send(err);
         }
 
-        // Logge den Benutzer ein, nachdem er sich registriert hat
         req.login(user, function (err) {
             if (err) {
                 console.error(err);
                 return next(err);
             }
-            console.log(user);
-            console.log(req.user.username);
             return res.status(200).send('OK');
         });
     });
 });
-
-
 
 
 app.post('/signIn', function (req, res, next) {
@@ -112,15 +102,11 @@ app.get('/user', function (req, res) {
         res.send(JSON.stringify(req.user))
         console.log('User logged in:', req.user);
     } else {
-        console.log('kein user is not logged in')
+        console.log('kein user eingeloggt')
         res.status(404).send([]);
     }
 });
 
-// app.get('/logout', function (req, res) {
-//     req.logout();
-//     return res.status(200).send('OK');
-// })
 
 app.get('/logout', function (req, res) {
     req.session.destroy(function(err) {
