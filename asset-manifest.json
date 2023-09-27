@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/sportturnier/static/css/main.f6e9fb76.css",
-    "main.js": "/sportturnier/static/js/main.aa619ab5.js",
+    "main.js": "/sportturnier/static/js/main.aca119d6.js",
     "static/js/787.8e1c3ec6.chunk.js": "/sportturnier/static/js/787.8e1c3ec6.chunk.js",
     "static/media/background.jpg": "/sportturnier/static/media/background.810d5b5632f05a5ef856.jpg",
     "static/media/digital-7.ttf": "/sportturnier/static/media/digital-7.93911ab167c943140756.ttf",
     "static/media/Digital Dismay.otf": "/sportturnier/static/media/Digital Dismay.8a8838f38696eb20b243.otf",
     "index.html": "/sportturnier/index.html",
     "main.f6e9fb76.css.map": "/sportturnier/static/css/main.f6e9fb76.css.map",
-    "main.aa619ab5.js.map": "/sportturnier/static/js/main.aa619ab5.js.map",
+    "main.aca119d6.js.map": "/sportturnier/static/js/main.aca119d6.js.map",
     "787.8e1c3ec6.chunk.js.map": "/sportturnier/static/js/787.8e1c3ec6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f6e9fb76.css",
-    "static/js/main.aa619ab5.js"
+    "static/js/main.aca119d6.js"
   ]
 }
