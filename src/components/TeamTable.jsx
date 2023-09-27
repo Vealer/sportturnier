@@ -1,10 +1,8 @@
 import React from 'react';
 
 function TeamTable({ matches, discipline }) {
-    // Erstellen eines Objekts, um die Statistiken für jedes Team zu speichern
     const teamStats = {};
 
-    // Durchlaufen der Matches, um Teamstatistiken zu aktualisieren
     matches.forEach(round => {
         round.forEach(match => {
             if (match.results[0] !== '' && match.results[1] !== '') {
