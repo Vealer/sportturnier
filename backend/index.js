@@ -119,7 +119,8 @@ app.get('/logout', function (req, res) {
 });
 
 
-const port = process.env.PORT || 4000
+// const port = process.env.PORT || 4000
+const port = "https://Vealer.github.io/sportturnier/"
 app.listen(port, () => {
     console.log('listening on port ' + port)
 })
