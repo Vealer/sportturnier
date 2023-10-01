@@ -10,6 +10,8 @@ require('dotenv').config()
 const app = express()
 const MongoStore = require('connect-mongo');
 
+app.use(express.static('public'))
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 
