@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh !important;
   height: 100%;
-  background-image: url('../public/img/background.jpg');
+  background-image: url('../public/assets/images/background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -17,13 +17,13 @@ body {
 
 @font-face {
   font-family: 'digital-clock'; 
-  src: url('../../sportturnier/public/assets/digital-7.ttf') 
+  src: url('../public/assets/fonts/digital-7.ttf') 
             format('truetype');
  }
 
  @font-face {
   font-family: 'digital-clock2'; 
-  src: url('../../sportturnier/public/assets/Digital Dismay.otf') 
+  src: url('../public/assets/fonts/Digital Dismay.otf') 
  }
 
 code {

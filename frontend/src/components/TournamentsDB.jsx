@@ -57,7 +57,7 @@ function TournamentsDB() {
                                         <button className="btn btn-danger btn-sm" onClick={(event) => handleDelete(event, index)}>X</button>
                                     </div>
                                 )}
-                                <img className="card-img-top" src={`/img/${data.name + '.jpg'}`} alt="Card cap" />
+                                <img className="card-img-top" src={`/assets/images/${data.name + '.jpg'}`} alt="Card cap" />
                                 <div className="card-body content ">
                                     <Link to={`/tournament/${index}`}>
                                         <div className='text-decoration-none '>

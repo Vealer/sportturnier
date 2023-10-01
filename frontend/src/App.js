@@ -39,7 +39,7 @@ function App() {
           <Navbar isLogged={isLoggedIn} getLoginStatus={changeLogin} />
         </header>
         <Routes>
-          <Route path="/sportturnier" exact element={<HomeDB isLogged={isLoggedIn} getLoginStatus={changeLogin} />} />
+          <Route path="/" exact element={<HomeDB isLogged={isLoggedIn} getLoginStatus={changeLogin} />} />
           <Route path="/new-competition" element={<Competition onFormSubmit={handleFormSubmit} />} />
           <Route path="/new-competitionDB" element={<CompetitionDB />} />
           <Route path="/tournaments" exact element={<Tournaments formData={formDataSet} onDeleteTournament={deleteTournament} />} />

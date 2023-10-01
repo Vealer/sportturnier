@@ -1,19 +1,16 @@
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const router = require('./routes/router')
-const mongoose = require('mongoose')
-const session = require('express-session')
-const passport = require('passport')
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const router = require('./routes/router');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
 const schemas = require('./models/schemas');
-require('dotenv').config()
-const app = express()
+require('dotenv').config();
 const MongoStore = require('connect-mongo');
 
-app.use(express.static('public'))
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+const app = express();
 
 const corsOptions = {
     origin: '*',
@@ -21,8 +18,11 @@ const corsOptions = {
     optionSuccessStatus: 200
 }
 
+// Apply middleware functions
+app.use(morgan(':method :url :status'));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
-
 app.use(session({
     secret: "Our little secret.",
     resave: false,
@@ -32,20 +32,21 @@ app.use(session({
         maxAge: 30 * 24 * 60 * 60 * 1000 //  30 Tage
     }
 }));
-
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Set public directory
+app.use(express.static('public'))
+
 app.use('/', router);
 
-
+// Set up database
 const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true }
 mongoose.connect(process.env.MONGODB_URI, dbOptions)
     .then(() => console.log('DB connection established'))
-    .catch(err => console.error(err))
+    .catch(err => console.error(err));
 
 passport.use(schemas.User.createStrategy());
-
 passport.serializeUser(schemas.User.serializeUser());
 passport.deserializeUser(schemas.User.deserializeUser());
 

@@ -52,7 +52,7 @@ function Navbar({ isLogged, getLoginStatus }) {
                 </ul>)}
                 {isLogged && <div className="dropdown ">
                     <div className='d-flex align-items-center'>
-                        <img src="../img/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown" style={{ cursor: 'pointer' }} />
+                        <img src="/assets/images/user.jpg" alt="User" className="dropdown-toggle navImg" data-toggle="dropdown" style={{ cursor: 'pointer' }} />
                         <p className="mb-0 ml-2">{user ? user.username : 'Gast'}</p>
                         <div className="dropdown-menu dropdown-menu-right">
                             <button className="dropdown-item" type="button" onClick={handleLogOut}>Ausloggen</button>
