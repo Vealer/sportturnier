@@ -16,7 +16,7 @@ function SingleTournament() {
 
     useEffect(() => {
         const fetchTournament = async () => {
-            const data = await fetch('/singleTournamentDB/' + id);
+            const data = await fetch('/api/tournaments/' + id);
             const tournament = await data.json();
             setSelectedTournament(tournament[0]);
             if(tournament[0].plan.length > 1){
@@ -106,7 +106,7 @@ function SingleTournament() {
 
     const updateTournamentPlan = async (tournamentId, newPlan) => {
         try {
-            const response = await fetch(`/setTournamentPlan/${tournamentId}`, {
+            const response = await fetch(`/api/tournaments/${tournamentId}/plan`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

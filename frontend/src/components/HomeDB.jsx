@@ -18,7 +18,7 @@ function Home({ getLoginStatus, isLogged }) {
     const login = validation(event);
     if (!login) return false;
     try {
-      const response = await fetch('/register', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: userName, password: userPassword })
@@ -41,7 +41,7 @@ function Home({ getLoginStatus, isLogged }) {
     if (!login) return false;
 
     try {
-      const response = await fetch('/signIn', {
+      const response = await fetch('/api/signIn', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: userName, password: userPassword })

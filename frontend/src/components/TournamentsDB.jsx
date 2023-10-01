@@ -11,7 +11,7 @@ function TournamentsDB() {
     const [tournaments, setTournaments] = useState([]);
 
     const fetchTournaments = async () => {
-        const data = await fetch('/tournaments');
+        const data = await fetch('/api/tournaments');
         const tournaments = await data.json();
         setTournaments(tournaments);
     };
@@ -37,7 +37,7 @@ function TournamentsDB() {
     const handleDelete = async (event, index) => {
         event.stopPropagation();
         const tournamentID = tournaments[index]._id.toString();
-        const response = await fetch(`/tournaments/${tournamentID}`, { method: 'DELETE' });
+        const response = await fetch(`/api/tournaments/${tournamentID}`, { method: 'DELETE' });
         if (response.ok) {
             fetchTournaments();
         } else {

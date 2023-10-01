@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const schemas = require('../models/schemas');
 
-router.post('/addTournament', async (req, res) => {
+router.post('/', async (req, res) => {
   const { sport, organizer, amount, location, tdate } = req.body;
   const newTournament = new schemas.Tournaments({
     organizer: organizer,
@@ -30,7 +30,7 @@ router.post('/addTournament', async (req, res) => {
 })
 
 
-router.get('/tournaments', async (req, res) => {
+router.get('/', async (req, res) => {
   const tournaments = schemas.Tournaments;
   tournaments.find({ user: req.user._id.toString() }).exec()
     .then(tournamentData => {
@@ -42,7 +42,7 @@ router.get('/tournaments', async (req, res) => {
     });
 });
 
-router.get('/singleTournamentDB/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const tournaments = schemas.Tournaments;
   tournaments.find({ _id: req.params.id }).exec()
     .then(tournamentData => {
@@ -54,7 +54,7 @@ router.get('/singleTournamentDB/:id', async (req, res) => {
     });
 });
 
-router.put('/setTournamentPlan/:id', async (req, res) => {
+router.put('/:id/plan', async (req, res) => {
   const tournaments = schemas.Tournaments;
   const tournamentId = req.params.id;
   const newPlan = req.body.plan;
@@ -77,7 +77,7 @@ router.put('/setTournamentPlan/:id', async (req, res) => {
 });
 
 
-router.delete('/tournaments/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const tournaments = schemas.Tournaments;
   try {
     const deletedTournament = await tournaments.findByIdAndDelete(req.params.id).exec();

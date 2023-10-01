@@ -20,7 +20,7 @@ function CompetitionDB() {
 
     return (
         <div className="container d-flex justify-content-center mt-5 ">
-            <form className='glass-green' method='POST' action='/addTournament'>
+            <form className='glass-green' method='POST' action='/api/tournaments/'>
                 <div className="form-row">
                     <div className="col-md-12 mb-3">
                         <input type="text" className="form-control" name='organizer'  placeholder="Veranstalter"  required />

@@ -7,7 +7,7 @@ function Navbar({ isLogged, getLoginStatus }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const data = await fetch('/user');
+            const data = await fetch('api/user');
             const user = await data.json();
             if (user.length > 0) {
                 console.log('user', user);
@@ -24,7 +24,7 @@ function Navbar({ isLogged, getLoginStatus }) {
     const [guestUser, setguestUser] = useState(false);
 
     const handleLogOut = async (e) => {
-        const data = await fetch('/logout');
+        const data = await fetch('/api/logout');
         console.log('logout', data);
         setUser([])
         navigate('/');
